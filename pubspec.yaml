@@ -1,0 +1,49 @@
+name: kiibati_mobile
+description: A new Flutter project.
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: '>=3.0.3 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+
+  sizer: ^2.0.15
+  provider: ^6.0.5
+  flutter_native_splash: ^2.3.1
+  flutter_launcher_icons: ^0.13.1
+  intl: ^0.18.1
+  timeago: ^3.4.0
+  video_player: ^2.7.0
+
+  # firebase packages
+  firebase_core: ^2.13.1
+  cloud_firestore: ^4.8.0
+  firebase_auth: ^4.6.2
+  firebase_messaging: ^14.6.3
+  firebase_storage: ^11.2.4
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
+
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/poppins/Poppins-Regular.ttf
+        - asset: assets/fonts/poppins/Poppins-ExtraBold.ttf
+          weight: 900
+        - asset: assets/fonts/poppins/Poppins-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/poppins/Poppins-SemiBold.ttf
+          weight: 500
+        - asset: assets/fonts/poppins/Poppins-Medium.ttf
+          weight: 300
