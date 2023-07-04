@@ -236,6 +236,7 @@ class _HomeScreenState extends State<HomeScreen> {
     });
   }
 
+  // video function
   void videoFunction() {
     if (isVideoAllowed == true) {
       videoController?.dispose();
@@ -256,6 +257,7 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+  // audio function
   void audioFunction() async {
     if (isAudioAllowed == true) {
       setState(() {
@@ -263,7 +265,7 @@ class _HomeScreenState extends State<HomeScreen> {
         isAudioAllowed = false;
       });
     } else {
-      await audioPlayer.play(AssetSource("audio/Inspiring-Dreams.mp3"));
+      await audioPlayer.play(AssetSource("audio/bishop.mp3"));
 
       setState(() {
         isVideoAllowed = false;
