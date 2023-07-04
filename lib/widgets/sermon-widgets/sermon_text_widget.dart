@@ -18,7 +18,7 @@ class SermonTextWidget extends StatelessWidget {
       child: Column(
         children: [
           Text(
-            "          $data",
+            "      $data",
             style: TextStyle(
               fontSize: textSize,
             ),
