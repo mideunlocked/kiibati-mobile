@@ -16,16 +16,16 @@ import '../widgets/sermon-widgets/sermon_title_widget.dart';
 import '../widgets/sermon-widgets/sermon-video-widgets/sermon_video_player.dart';
 import '../widgets/sermon-widgets/sermon_type_button.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({
+class SermonScreen extends StatefulWidget {
+  const SermonScreen({
     super.key,
   });
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<SermonScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<SermonScreen> {
   double textSize = 12.sp;
   bool isVideoAllowed = false;
   bool isAudioAllowed = false;
@@ -111,6 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
                           Expanded(
                             child: SingleChildScrollView(
+                              physics: const BouncingScrollPhysics(),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [

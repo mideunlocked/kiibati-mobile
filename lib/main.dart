@@ -4,7 +4,7 @@ import 'package:sizer/sizer.dart';
 
 import 'firebase_options.dart';
 import 'helpers/firebase_messaging.dart';
-import 'screens/sermon_screen.dart';
+import 'screens/home_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
