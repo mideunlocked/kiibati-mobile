@@ -27,7 +27,7 @@ class HomePageAppBar extends StatelessWidget {
 
         // greeting (greet user according to time of the day)
         Text(
-          "Good $periodOfDay",
+          "Good $periodOfDay Ariyo",
           style: TextStyle(
             color: Colors.black26,
             fontWeight: FontWeight.w500,
