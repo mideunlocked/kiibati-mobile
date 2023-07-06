@@ -36,9 +36,9 @@ class MainApp extends StatelessWidget {
               bodyLarge: TextStyle(
                 fontFamily: "Poppins",
                 fontSize: 16.sp,
-                color: const Color.fromARGB(255, 46, 0, 102),
+                color: Colors.black,
                 fontWeight: FontWeight.w700,
-                fontStyle: FontStyle.italic,
+                // fontStyle: FontStyle.italic,
               ),
               bodyMedium: TextStyle(
                 fontFamily: "Poppins",
@@ -48,7 +48,7 @@ class MainApp extends StatelessWidget {
               bodySmall: TextStyle(
                 fontFamily: "Poppins",
                 fontSize: 8.sp,
-                color: Colors.black,
+                color: Colors.black45,
               ),
             ),
             floatingActionButtonTheme: const FloatingActionButtonThemeData(

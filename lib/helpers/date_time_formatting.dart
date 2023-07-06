@@ -13,6 +13,25 @@ class DateTimeFormatting {
     return [formattedTime, formattedDate];
   }
 
+  String getGreeting() {
+    final currentTime = DateTime.now();
+    final formatter = DateFormat.Hm();
+
+    final morningStartTime = formatter.parse('06:00');
+    final afternoonStartTime = formatter.parse('12:00');
+    final eveningStartTime = formatter.parse('18:00');
+
+    if (currentTime.isAfter(eveningStartTime)) {
+      return 'Evening';
+    } else if (currentTime.isAfter(afternoonStartTime)) {
+      return 'Afternoon';
+    } else if (currentTime.isAfter(morningStartTime)) {
+      return 'Morning';
+    } else {
+      return 'Night';
+    }
+  }
+
   String timeAgo(Timestamp timestamp) {
     DateTime dateTime = timestamp.toDate();
     var dateTimeAgo = timeago.format(dateTime, locale: "en_short");

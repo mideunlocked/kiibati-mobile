@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kiibati_mobile/screens/bottom-nav-screens/home_page.dart';
 import 'package:kiibati_mobile/widgets/bottom-nav-widgets/custom_bottom_nav.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -16,9 +17,7 @@ class _HomeScreenState extends State<HomeScreen> {
   );
 
   var pages = const [
-    Center(
-      child: Text("Home Screen"),
-    ),
+    HomePage(),
     Center(
       child: Text("Sermons screen"),
     ),
@@ -47,6 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
             // home screen pages with page view
             PageView(
               controller: pageController,
+              physics: const NeverScrollableScrollPhysics(),
               children: pages,
               onPageChanged: (index) => setState(() {
                 currentIndex = index;
