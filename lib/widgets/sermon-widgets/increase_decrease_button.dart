@@ -6,8 +6,10 @@ class IncreaseDecreaseButton extends StatelessWidget {
     super.key,
     required this.icon,
     required this.function,
+    required this.heroTag,
   });
 
+  final String heroTag;
   final IconData icon;
   final Function function;
 
@@ -16,6 +18,7 @@ class IncreaseDecreaseButton extends StatelessWidget {
     return SizedBox(
       height: 30.sp,
       child: FloatingActionButton(
+        heroTag: heroTag,
         onPressed: () {
           function();
         },

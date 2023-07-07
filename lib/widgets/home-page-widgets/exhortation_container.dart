@@ -16,13 +16,17 @@ class ExhortationContainer extends StatelessWidget {
     return InkWell(
       onTap: () => showExhortationDialog(context), // show exhortation dialog
       child: Container(
-        height: 25.h,
+        height: 30.h,
         width: 100.w,
         decoration: BoxDecoration(
           color: primaryColor,
           borderRadius: BorderRadius.circular(20),
         ),
         padding: EdgeInsets.symmetric(vertical: 2.h, horizontal: 4.w),
+        margin: EdgeInsets.only(
+          left: 4.w,
+          right: 4.w,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -52,7 +56,7 @@ class ExhortationContainer extends StatelessWidget {
             // exhortation text
             const Text(
               "Embrace the power of gratitude this week. Take a moment each day to appreciate the blessings around you, both big and small. Cultivating a heart of gratitude brings joy, contentment, and a deeper connection to the goodness of life. Let gratitude be your guiding light, illuminating the path of positivity and abundance.",
-              maxLines: 4,
+              maxLines: 6,
               softWrap: true,
               overflow: TextOverflow.ellipsis,
               style: TextStyle(

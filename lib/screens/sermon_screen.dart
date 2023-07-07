@@ -43,23 +43,29 @@ class _HomeScreenState extends State<SermonScreen> {
 
     // listen to state: playing, paused, stopped
     audioPlayer.onPlayerStateChanged.listen((event) {
-      setState(() {
-        isPlaying = event == PlayerState.playing;
-      });
+      if (mounted) {
+        setState(() {
+          isPlaying = event == PlayerState.playing;
+        });
+      }
     });
 
     // listen to audio duration
     audioPlayer.onDurationChanged.listen((newDuration) {
-      setState(() {
-        duration = newDuration;
-      });
+      if (mounted) {
+        setState(() {
+          duration = newDuration;
+        });
+      }
     });
 
     // listen to audio position change
     audioPlayer.onPositionChanged.listen((newPosition) {
-      setState(() {
-        position = newPosition;
-      });
+      if (mounted) {
+        setState(() {
+          position = newPosition;
+        });
+      }
     });
   }
 
@@ -141,6 +147,7 @@ class _HomeScreenState extends State<SermonScreen> {
                                     child: Row(
                                       children: [
                                         SermonTypeButton(
+                                          heroTag: "1",
                                           icon: isVideoAllowed == true
                                               ? Icons.tv_off_rounded
                                               : Icons.tv_rounded,
@@ -153,6 +160,7 @@ class _HomeScreenState extends State<SermonScreen> {
                                           width: 5.w,
                                         ),
                                         SermonTypeButton(
+                                          heroTag: "2",
                                           icon: Icons.multitrack_audio_rounded,
                                           iconColor: isAudioAllowed == true
                                               ? Colors.red

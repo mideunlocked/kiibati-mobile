@@ -15,7 +15,9 @@ class SermonTitleWidget extends StatelessWidget {
       padding: EdgeInsets.only(bottom: 1.h),
       child: Text(
         "Title: Running The Race Of Faith",
-        style: textTheme.bodyLarge,
+        style: textTheme.bodyLarge?.copyWith(
+          color: Theme.of(context).primaryColor,
+        ),
       ),
     );
   }

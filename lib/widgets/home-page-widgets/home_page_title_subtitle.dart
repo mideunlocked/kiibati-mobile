@@ -18,25 +18,31 @@ class HomePageTitleSubtitle extends StatelessWidget {
     var textTheme = of.textTheme;
     var primaryColor = of.primaryColor;
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          title,
-          style: textTheme.bodyMedium?.copyWith(
-            fontWeight: FontWeight.w500,
-            color: primaryColor,
+    return Padding(
+      padding: EdgeInsets.only(
+        left: 4.w,
+        right: 4.w,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            title,
+            style: textTheme.bodyMedium?.copyWith(
+              fontWeight: FontWeight.w500,
+              color: primaryColor,
+            ),
           ),
-        ),
-        SizedBox(
-          height: 0.5.h,
-        ),
-        Text(
-          subtitle,
-          style: textTheme.bodySmall,
-        ),
-        sizedBox,
-      ],
+          SizedBox(
+            height: 0.5.h,
+          ),
+          Text(
+            subtitle,
+            style: textTheme.bodySmall,
+          ),
+          sizedBox,
+        ],
+      ),
     );
   }
 }

@@ -23,6 +23,7 @@ class SermonScreenFloatingActionButtons extends StatelessWidget {
         children: [
           // increment floating action button
           IncreaseDecreaseButton(
+            heroTag: "3",
             function: () {
               increaseText();
             },
@@ -35,6 +36,7 @@ class SermonScreenFloatingActionButtons extends StatelessWidget {
 
           // decrement floating action button
           IncreaseDecreaseButton(
+            heroTag: "4",
             function: () {
               decreaseText();
             },
