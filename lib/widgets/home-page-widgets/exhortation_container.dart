@@ -17,7 +17,7 @@ class ExhortationContainer extends StatelessWidget {
       onTap: () => showExhortationDialog(context), // show exhortation dialog
       child: Container(
         height: 30.h,
-        width: 100.w,
+        width: double.infinity,
         decoration: BoxDecoration(
           color: primaryColor,
           borderRadius: BorderRadius.circular(20),

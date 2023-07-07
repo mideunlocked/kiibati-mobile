@@ -56,7 +56,7 @@ class _SermonVideoPlayerState extends State<SermonVideoPlayer> {
                           : widget.videoController?.play();
                     },
                     child: Icon(
-                      widget.videoController!.value.isPlaying
+                      widget.videoController?.value.isPlaying ?? false
                           ? Icons.pause_circle_filled_rounded
                           : Icons.play_circle_fill_rounded,
                       color: Colors.white38,

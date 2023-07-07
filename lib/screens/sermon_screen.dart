@@ -93,7 +93,7 @@ class _HomeScreenState extends State<SermonScreen> {
         );
 
         var primaryColor = of.primaryColor;
-        return isLandscape
+        return isLandscape && isVideoAllowed == true
             ? sermonVideoPlayer
             : SafeArea(
                 child: Stack(
@@ -220,7 +220,7 @@ class _HomeScreenState extends State<SermonScreen> {
       floatingActionButton: OrientationBuilder(builder: (context, orientation) {
         bool isLandscape = orientation == Orientation.landscape;
 
-        return isLandscape
+        return isLandscape && isVideoAllowed == true
             ? const SizedBox()
             : SermonScreenFloatingActionButtons(
                 increaseText: () => increaseText(),

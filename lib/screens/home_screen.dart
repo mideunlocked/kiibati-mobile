@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:kiibati_mobile/screens/bottom-nav-screens/home_page.dart';
-import 'package:kiibati_mobile/widgets/bottom-nav-widgets/custom_bottom_nav.dart';
+
+import '../widgets/bottom-nav-widgets/custom_bottom_nav.dart';
+import 'bottom-nav-screens/home_page.dart';
+import 'bottom-nav-screens/sermon_list_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -18,9 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   var pages = const [
     HomePage(),
-    Center(
-      child: Text("Sermons screen"),
-    ),
+    SermonListScreen(),
     Center(
       child: Text("Prayer screen"),
     ),
