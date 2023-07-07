@@ -39,7 +39,7 @@ class AnnouncemenstsWidget extends StatelessWidget {
               timeDate: "Wednesday, 7:00 am",
             ),
             const AnnoucementContainer(
-              title: "Night of God's of throne",
+              title: "Night of God's throne",
               subtitle:
                   "Prepare to encounter the majesty and presence of God during our Night Vigil: Night of God's Throne. Join us for a night of worship, prayer, and seeking God's face as we gather in anticipation of divine encounters, spiritual breakthroughs, and transformative experiences in the presence of His glorious throne.",
               timeDate: "Quartely last friday of the month, 11pm",

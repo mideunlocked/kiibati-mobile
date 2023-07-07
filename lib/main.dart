@@ -33,6 +33,12 @@ class MainApp extends StatelessWidget {
                 fontWeight: FontWeight.w700,
                 color: const Color.fromARGB(255, 46, 0, 102),
               ),
+              titleMedium: TextStyle(
+                fontFamily: "Poppins",
+                fontSize: 12.sp,
+                fontWeight: FontWeight.w500,
+                color: Colors.white,
+              ),
               bodyLarge: TextStyle(
                 fontFamily: "Poppins",
                 fontSize: 16.sp,

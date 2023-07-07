@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kiibati_mobile/screens/choir_ministration_screen.dart';
 import 'package:kiibati_mobile/screens/church_highlight_screen.dart';
 import 'package:kiibati_mobile/screens/sermon_screen.dart';
 import 'package:sizer/sizer.dart';
@@ -36,11 +37,9 @@ class ChurchTodayGridView extends StatelessWidget {
           imageUrl:
               "https://images.pexels.com/photos/2774546/pexels-photo-2774546.jpeg?auto=compress&cs=tinysrgb&w=600",
           function: () {
-            Navigator.push(
+            navigateFunction(
               context,
-              MaterialPageRoute(
-                builder: (ctx) => const ChurchHighlightScreen(),
-              ),
+              const ChurchHighlightScreen(),
             );
           },
         ),
@@ -50,11 +49,9 @@ class ChurchTodayGridView extends StatelessWidget {
           imageUrl:
               "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsUuhYKdM8YsgR9-0azxRCaId4Bt_R1P6jcA&usqp=CAU",
           function: () {
-            Navigator.push(
+            navigateFunction(
               context,
-              MaterialPageRoute(
-                builder: (ctx) => const SermonScreen(),
-              ),
+              const SermonScreen(),
             );
           },
         ),
@@ -79,7 +76,9 @@ class ChurchTodayGridView extends StatelessWidget {
           title: "Last sunday choir ministration",
           imageUrl:
               "https://images.pexels.com/photos/7520744/pexels-photo-7520744.jpeg?auto=compress&cs=tinysrgb&w=600",
-          function: () {},
+          function: () {
+            navigateFunction(context, const ChoirMinistrationScreen());
+          },
         ),
         ChurchTodayContainer(
           primaryColor: primaryColor,
@@ -87,15 +86,19 @@ class ChurchTodayGridView extends StatelessWidget {
           imageUrl:
               "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnOmGlmX5cuUMjuKUciEHFzlMstqxcWNvUfA&usqp=CAU",
           function: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (ctx) => const SermonScreen(),
-              ),
-            );
+            navigateFunction(context, const SermonScreen());
           },
         ),
       ],
+    );
+  }
+
+  Future<dynamic> navigateFunction(BuildContext context, Widget screen) {
+    return Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (ctx) => screen,
+      ),
     );
   }
 
