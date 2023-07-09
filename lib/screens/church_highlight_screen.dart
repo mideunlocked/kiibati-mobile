@@ -76,7 +76,9 @@ class _ChurchHighlightScreenState extends State<ChurchHighlightScreen> {
               padding: EdgeInsets.only(top: 3.h),
               child: Row(
                 children: [
-                  const CustomBackButton(),
+                  const CustomBackButton(
+                    iconColor: Colors.white,
+                  ),
                   SizedBox(
                     width: 5.w,
                   ),

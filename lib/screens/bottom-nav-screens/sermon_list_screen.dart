@@ -14,28 +14,41 @@ class SermonListScreen extends StatefulWidget {
 class _SermonListScreenState extends State<SermonListScreen> {
   @override
   Widget build(BuildContext context) {
+    var sizedBox = SizedBox(
+      height: 2.h,
+    );
+
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 3.w),
       child: Column(
         children: [
-          SizedBox(
-            height: 2.h,
+          sizedBox,
+
+          // sermons app bar
+          SermonPrayerListScreenAppBar(
+            title: "Sermons",
+            subtitle:
+                "Deepen your spiritual journey and gain fresh insights into God's Word through our enriching sermons.",
+            function: () {},
           ),
-          const SermonListScreenAppBar(),
-          SizedBox(
-            height: 2.h,
-          ),
+          sizedBox,
+
+          // sermons list view
           Expanded(
             child: ListView(
-              children: const [
-                SermonListWidget(),
-                SermonListWidget(),
-                SermonListWidget(),
-                SermonListWidget(),
-                SermonListWidget(),
-                SermonListWidget(),
-                SermonListWidget(),
-                SermonListWidget(),
+              physics: const BouncingScrollPhysics(),
+              children: [
+                const SermonListWidget(),
+                const SermonListWidget(),
+                const SermonListWidget(),
+                const SermonListWidget(),
+                const SermonListWidget(),
+                const SermonListWidget(),
+                const SermonListWidget(),
+                const SermonListWidget(),
+                SizedBox(
+                  height: 10.h,
+                ),
               ],
             ),
           ),

@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:kiibati_mobile/widgets/general-widgets/custome_back_button.dart';
 import 'package:sizer/sizer.dart';
 
-class SermonAppBar extends StatelessWidget {
-  const SermonAppBar({
+import '../general-widgets/custome_back_button.dart';
+
+class PrayerSreenAppBar extends StatelessWidget {
+  const PrayerSreenAppBar({
     super.key,
-    required this.textTheme,
+    required this.title,
   });
 
-  final TextTheme textTheme;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
+    var of = Theme.of(context);
+    var primaryColor = of.primaryColor;
+
     return Padding(
       padding: EdgeInsets.only(
         top: 1.h,
@@ -22,8 +26,8 @@ class SermonAppBar extends StatelessWidget {
         children: [
           const CustomBackButton(),
           Text(
-            "Sermon",
-            style: textTheme.titleLarge,
+            title,
+            style: TextStyle(color: primaryColor),
           ),
           const Icon(
             Icons.arrow_circle_down_rounded,

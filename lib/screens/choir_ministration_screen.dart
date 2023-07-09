@@ -53,7 +53,9 @@ class _ChoirMinistrationScreenState extends State<ChoirMinistrationScreen> {
             ? null
             : AppBar(
                 backgroundColor: Colors.transparent,
-                leading: const CustomBackButton(),
+                leading: const CustomBackButton(
+                  iconColor: Colors.white,
+                ),
                 title: const Text("Last sunday choir ministration"),
                 titleTextStyle: titleMedium,
               ),

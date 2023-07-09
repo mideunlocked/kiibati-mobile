@@ -3,18 +3,21 @@ import 'package:flutter/material.dart';
 class CustomBackButton extends StatelessWidget {
   const CustomBackButton({
     super.key,
+    this.iconColor = Colors.black,
   });
+
+  final Color iconColor;
 
   @override
   Widget build(BuildContext context) {
-    return IconButton(
-      onPressed: () {
+    return InkWell(
+      onTap: () {
         Navigator.pop(context);
       },
-      icon: const Icon(
+      child: Icon(
         Icons.arrow_back_ios_new_rounded,
+        color: iconColor,
       ),
-      color: Colors.white,
     );
   }
 }

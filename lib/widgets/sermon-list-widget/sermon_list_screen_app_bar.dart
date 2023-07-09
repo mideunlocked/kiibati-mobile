@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
-class SermonListScreenAppBar extends StatelessWidget {
-  const SermonListScreenAppBar({
+class SermonPrayerListScreenAppBar extends StatelessWidget {
+  const SermonPrayerListScreenAppBar({
     super.key,
+    required this.title,
+    required this.subtitle,
+    required this.function,
   });
+
+  final String title, subtitle;
+  final Function function;
 
   @override
   Widget build(BuildContext context) {
@@ -23,23 +29,29 @@ class SermonListScreenAppBar extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Sermons",
+                  title,
                   style: TextStyle(
                     fontWeight: FontWeight.w500,
                     color: primaryColor,
                   ),
                 ),
                 Text(
-                  "Deepen your spiritual journey and gain fresh insights into God's Word through our enriching sermons.",
+                  subtitle,
                   style: textTheme.bodySmall,
                 )
               ],
             ),
           ),
-          Image.asset(
-            "assets/icons/search.png",
-            height: 2.5.h,
-            color: primaryColor,
+          InkWell(
+            onTap: () {
+              function();
+            },
+            borderRadius: BorderRadius.circular(20),
+            child: Image.asset(
+              "assets/icons/search.png",
+              height: 2.5.h,
+              color: primaryColor,
+            ),
           ),
         ],
       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kiibati_mobile/screens/bottom-nav-screens/prayers_list_screen.dart';
 
 import '../widgets/bottom-nav-widgets/custom_bottom_nav.dart';
 import 'bottom-nav-screens/home_page.dart';
@@ -21,9 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
   var pages = const [
     HomePage(),
     SermonListScreen(),
-    Center(
-      child: Text("Prayer screen"),
-    ),
+    PrayerListScreen(),
     Center(
       child: Text("More"),
     ),
