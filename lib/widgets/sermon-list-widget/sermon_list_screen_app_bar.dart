@@ -33,6 +33,7 @@ class SermonPrayerListScreenAppBar extends StatelessWidget {
                   style: TextStyle(
                     fontWeight: FontWeight.w500,
                     color: primaryColor,
+                    fontSize: 16.sp,
                   ),
                 ),
                 Text(
