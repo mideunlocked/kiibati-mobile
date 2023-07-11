@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kiibati_mobile/screens/bottom-nav-screens/prayers_list_screen.dart';
-import 'package:kiibati_mobile/screens/more_screen.dart';
+import 'package:kiibati_mobile/screens/bottom-nav-screens/more_screen.dart';
 
 import '../widgets/bottom-nav-widgets/custom_bottom_nav.dart';
 import 'bottom-nav-screens/home_page.dart';

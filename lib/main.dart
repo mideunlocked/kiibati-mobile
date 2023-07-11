@@ -26,13 +26,17 @@ class MainApp extends StatelessWidget {
     return Sizer(
       builder: (context, orientation, deviceType) => MaterialApp(
         debugShowCheckedModeBanner: false,
-        // darkTheme: ThemeData.dark().copyWith(
-        //   floatingActionButtonTheme: FloatingActionButtonThemeData(
-        //     backgroundColor: const Color.fromARGB(255, 73, 73, 73),
-        //   ),
-        // ),
         theme: ThemeData(
           primaryColor: primaryColor,
+          appBarTheme: AppBarTheme(
+            elevation: 0,
+            color: Colors.transparent,
+            titleTextStyle: TextStyle(
+              fontFamily: "Poppins",
+              fontSize: 12.sp,
+              color: Colors.black,
+            ),
+          ),
           textTheme: TextTheme(
             titleLarge: TextStyle(
               fontFamily: "Poppins",

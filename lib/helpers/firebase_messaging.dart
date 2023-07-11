@@ -7,7 +7,6 @@ class FirebaseMessagingHelper {
     await fcm.requestPermission();
     await fcm.subscribeToTopic("Features");
 
-    final token = await fcm.getToken();
-    print(token);
+    // final token = await fcm.getToken();
   }
 }
