@@ -37,6 +37,21 @@ class MainApp extends StatelessWidget {
               color: Colors.black,
             ),
           ),
+          inputDecorationTheme: InputDecorationTheme(
+            hintStyle: TextStyle(
+              color: Colors.black26,
+              fontSize: 12.sp,
+              fontFamily: "PlusJakartaSans",
+            ),
+            labelStyle: TextStyle(
+              color: Colors.black26,
+              fontSize: 12.sp,
+              fontFamily: "PlusJakartaSans",
+            ),
+            alignLabelWithHint: true,
+            floatingLabelBehavior: FloatingLabelBehavior.auto,
+            focusedBorder: const UnderlineInputBorder(),
+          ),
           textTheme: TextTheme(
             titleLarge: TextStyle(
               fontFamily: "Poppins",

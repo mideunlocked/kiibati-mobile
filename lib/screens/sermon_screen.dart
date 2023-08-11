@@ -102,7 +102,7 @@ class _HomeScreenState extends State<SermonScreen> {
                     Padding(
                       padding: EdgeInsets.symmetric(
                         vertical: 1.h,
-                        horizontal: 3.w,
+                        horizontal: 4.w,
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
