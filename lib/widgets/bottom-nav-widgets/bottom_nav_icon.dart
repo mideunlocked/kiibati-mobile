@@ -30,10 +30,8 @@ class BottomNavIcon extends StatelessWidget {
 
   // function to change page in bottom nav
   void changePage(int index, context) {
-    pageController.animateToPage(
+    pageController.jumpToPage(
       index,
-      curve: Curves.decelerate,
-      duration: const Duration(milliseconds: 200),
     );
   }
 }

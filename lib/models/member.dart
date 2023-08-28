@@ -5,6 +5,7 @@ class Member {
   final String lastName;
   final String mobileNumber;
   final String emailAddress;
+  // age, marital status, sex, profession
 
   const Member({
     required this.id,

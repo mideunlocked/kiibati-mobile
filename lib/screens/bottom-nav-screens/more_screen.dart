@@ -7,7 +7,6 @@ import '../../widgets/more-widgets/more_screen_app_bar.dart';
 import '../../widgets/more-widgets/name_container.dart';
 import '../more-screens/about_church_screen.dart';
 import '../more-screens/bookmarks_screen.dart';
-import '../more-screens/chat_with_us_screen.dart';
 import '../more-screens/find_church_screen.dart';
 import '../more-screens/pastors_screen.dart';
 import '../more-screens/pay_offering_screen.dart';
@@ -37,13 +36,13 @@ class MoreScreen extends StatelessWidget {
                   widget: NameContainer(fullName: fullName),
                   page: const ProfileScreen(),
                 ),
-                const MoreListTile(
-                  title: "Chat with us",
-                  widget: MoreIcon(
-                    iconUrl: "bubble-chat",
-                  ),
-                  page: ChatWithUsScreen(),
-                ),
+                // const MoreListTile(
+                //   title: "Chat with us",
+                //   widget: MoreIcon(
+                //     iconUrl: "bubble-chat",
+                //   ),
+                //   page: ChatWithUsScreen(),
+                // ),
                 const MoreListTile(
                   title: "Bookmarks",
                   widget: MoreIcon(

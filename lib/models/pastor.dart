@@ -1,11 +1,11 @@
-class Pastors {
+class Pastor {
   final String id;
   final String imageUrl;
   final String fullName;
   final String position;
   final List<dynamic> sermons;
 
-  const Pastors({
+  const Pastor({
     required this.id,
     required this.position,
     required this.fullName,

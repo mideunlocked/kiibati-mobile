@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:kiibati_mobile/screens/forgot_password_screen.dart';
-import 'package:kiibati_mobile/screens/more-screens/profile_screen.dart';
-import 'package:kiibati_mobile/widgets/general-widgets/custom_button.dart';
 import 'package:sizer/sizer.dart';
+
+import '../../widgets/general-widgets/custom_button.dart';
+import '../../widgets/more-widgets/custom_profile_appbar.dart';
+import '../../widgets/more-widgets/profile_textfield.dart';
+import '../forgot_password_screen.dart';
 
 class ChangePasswordScreen extends StatefulWidget {
   const ChangePasswordScreen({super.key});
