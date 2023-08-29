@@ -65,10 +65,17 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     onTap: () {
                       Navigator.pop(context);
                     },
-                    child: Image.asset(
-                      "assets/icons/close.png",
-                      height: 10.sp,
-                      width: 10.sp,
+                    child: Container(
+                      height: 4.h,
+                      width: 4.w,
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                      ),
+                      child: Image.asset(
+                        "assets/icons/close.png",
+                        height: 10.sp,
+                        width: 10.sp,
+                      ),
                     ),
                   ),
                 ],

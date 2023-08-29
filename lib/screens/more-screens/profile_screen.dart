@@ -21,7 +21,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   var lastNameController = TextEditingController();
   var numberController = TextEditingController();
   var emailController = TextEditingController();
-  var ageController = TextEditingController();
   var professionController = TextEditingController();
   var dateOfBirthController = TextEditingController();
 
@@ -29,7 +28,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   final lastNameNode = FocusNode();
   final numberNode = FocusNode();
   final emailNode = FocusNode();
-  final ageNode = FocusNode();
   final professionNode = FocusNode();
   final dateOfBirthNode = FocusNode();
 
@@ -41,7 +39,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
     lastNameController = TextEditingController(text: "Osuolale");
     numberController = TextEditingController(text: "07040225758");
     emailController = TextEditingController(text: "osuolaleariyo@gmail.com");
-    ageController = TextEditingController(text: "18");
     professionController = TextEditingController(text: "Student");
     dateOfBirthController = TextEditingController(text: "24/10/2004");
 
@@ -56,7 +53,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
     lastNameController.dispose();
     numberController.dispose();
     emailController.dispose();
-    ageController.dispose();
     professionController.dispose();
     dateOfBirthController.dispose();
   }
@@ -143,17 +139,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               SizedBox(
                 height: 1.h,
-              ),
-              ProfileTextfield(
-                editable: editable,
-                controller: ageController,
-                node: ageNode,
-                labelText: "Age",
-                hintText: "Enter age",
-                textInputType: TextInputType.number,
-              ),
-              SizedBox(
-                height: 2.h,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

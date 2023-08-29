@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kiibati_mobile/screens/choir_ministration_screen.dart';
 import 'package:kiibati_mobile/screens/church_highlight_screen.dart';
+import 'package:kiibati_mobile/screens/prayer_screen.dart';
 import 'package:kiibati_mobile/screens/sermon_screen.dart';
 import 'package:sizer/sizer.dart';
 
@@ -60,7 +61,14 @@ class ChurchTodayGridView extends StatelessWidget {
           title: "Prayers for the week",
           imageUrl:
               "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRkYIJr1-SjhbwnIfCn9olFl9Fs2I0ikXFl3A&usqp=CAU",
-          function: () {},
+          function: () {
+            navigateFunction(
+              context,
+              const PrayerScreen(
+                title: "Prayers for the week",
+              ),
+            );
+          },
         ),
         ChurchTodayContainer(
           primaryColor: primaryColor,

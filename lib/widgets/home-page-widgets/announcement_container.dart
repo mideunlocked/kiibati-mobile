@@ -30,34 +30,38 @@ class AnnoucementContainer extends StatelessWidget {
         color: of.primaryColor,
         borderRadius: BorderRadius.circular(20),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            title,
-            style: textTheme.bodyLarge?.copyWith(
-              color: Colors.white,
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              title,
+              style: textTheme.bodyLarge?.copyWith(
+                color: Colors.white,
+              ),
             ),
-          ),
-          SizedBox(
-            height: 1.h,
-          ),
-          Text(
-            subtitle,
-            style: TextStyle(
-              color: Colors.white60,
-              fontSize: 10.sp,
+            SizedBox(
+              height: 1.h,
             ),
-          ),
-          const Spacer(),
-          Text(
-            timeDate,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 8.sp,
+            Text(
+              subtitle,
+              style: TextStyle(
+                color: Colors.white60,
+                fontSize: 10.sp,
+              ),
             ),
-          ),
-        ],
+            SizedBox(
+              height: 5.h,
+            ),
+            Text(
+              timeDate,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 8.sp,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

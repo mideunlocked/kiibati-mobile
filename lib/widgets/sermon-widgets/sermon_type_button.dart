@@ -19,24 +19,30 @@ class SermonTypeButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FloatingActionButton.extended(
-      heroTag: heroTag,
-      onPressed: () {
-        function();
-      },
-      label: Row(
-        children: [
-          Icon(
-            icon,
-            color: iconColor,
-          ),
-          SizedBox(
-            width: 3.w,
-          ),
-          Text(
-            label,
-          ),
-        ],
+    return SizedBox(
+      width: 42.w,
+      child: FloatingActionButton.extended(
+        heroTag: heroTag,
+        onPressed: () {
+          function();
+        },
+        label: Row(
+          children: [
+            Icon(
+              icon,
+              color: iconColor,
+            ),
+            SizedBox(
+              width: 2.w,
+            ),
+            Text(
+              label,
+              style: TextStyle(
+                fontSize: 10.sp,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

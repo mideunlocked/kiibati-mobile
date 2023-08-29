@@ -28,6 +28,25 @@ class HomePage extends StatelessWidget {
           const HomePageAppBar(),
           sizedBox,
           HomePageTitleSubtitle(
+            title: "Upcoming service",
+            subtitle:
+                "Discover the heart of our next service as we explore an uplifting message together.",
+            sizedBox: sizedBox,
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: 4.w,
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20),
+              child: Image.asset(
+                "assets/images/upcoming.jpeg",
+              ),
+            ),
+          ),
+          sizedBox,
+          sizedBox,
+          HomePageTitleSubtitle(
             title: "Announcement",
             subtitle:
                 "Discover the latest updates, sermons, and activities happening in our church community.",
