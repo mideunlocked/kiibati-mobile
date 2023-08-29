@@ -15,6 +15,7 @@ class CustomProfileAppBar extends StatelessWidget
     var textTheme = of.textTheme;
     var bodyMedium = textTheme.bodyMedium;
 
+    var primaryColor = of.primaryColor;
     return AppBar(
       centerTitle: true,
       leading: const CustomBackButton(),
@@ -22,6 +23,7 @@ class CustomProfileAppBar extends StatelessWidget
         title,
         style: bodyMedium?.copyWith(
           fontWeight: FontWeight.bold,
+          color: primaryColor,
         ),
       ),
       actions: actions,

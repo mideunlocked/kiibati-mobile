@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
@@ -19,11 +21,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
   var lastNameController = TextEditingController();
   var numberController = TextEditingController();
   var emailController = TextEditingController();
+  var ageController = TextEditingController();
+  var professionController = TextEditingController();
+  var dateOfBirthController = TextEditingController();
 
   final firstNameNode = FocusNode();
   final lastNameNode = FocusNode();
   final numberNode = FocusNode();
   final emailNode = FocusNode();
+  final ageNode = FocusNode();
+  final professionNode = FocusNode();
+  final dateOfBirthNode = FocusNode();
 
   @override
   void initState() {
@@ -33,6 +41,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
     lastNameController = TextEditingController(text: "Osuolale");
     numberController = TextEditingController(text: "07040225758");
     emailController = TextEditingController(text: "osuolaleariyo@gmail.com");
+    ageController = TextEditingController(text: "18");
+    professionController = TextEditingController(text: "Student");
+    dateOfBirthController = TextEditingController(text: "24/10/2004");
+
+    status = "Single";
   }
 
   @override
@@ -43,7 +56,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
     lastNameController.dispose();
     numberController.dispose();
     emailController.dispose();
+    ageController.dispose();
+    professionController.dispose();
+    dateOfBirthController.dispose();
   }
+
+  var status = "Single";
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +69,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     var textTheme = of.textTheme;
     var bodyMedium = textTheme.bodyMedium;
 
+    var primaryColor = of.primaryColor;
     return Scaffold(
       appBar: CustomProfileAppBar(
         title: "Profile",
@@ -115,14 +134,52 @@ class _ProfileScreenState extends State<ProfileScreen> {
               SizedBox(
                 height: 5.h,
               ),
-              const Text(
+              Text(
                 "PRIVATE INFO",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
+                  color: primaryColor,
                 ),
               ),
               SizedBox(
                 height: 1.h,
+              ),
+              ProfileTextfield(
+                editable: editable,
+                controller: ageController,
+                node: ageNode,
+                labelText: "Age",
+                hintText: "Enter age",
+                textInputType: TextInputType.number,
+              ),
+              SizedBox(
+                height: 2.h,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  MaritalStatusWidget(
+                    editable: editable,
+                    status: status,
+                  ),
+                  DateOfBirthPicker(
+                    editable: editable,
+                    dateOfBirthController: dateOfBirthController,
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 2.h,
+              ),
+              ProfileTextfield(
+                editable: editable,
+                controller: professionController,
+                node: professionNode,
+                labelText: "Profession",
+                hintText: "Enter profession",
+              ),
+              SizedBox(
+                height: 2.h,
               ),
               ProfileTextfield(
                 editable: editable,
@@ -159,10 +216,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   );
                 },
-                child: const Text(
+                child: Text(
                   "EDIT PASSWORD",
                   style: TextStyle(
-                    color: Colors.black,
+                    color: primaryColor,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -170,6 +227,153 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class DateOfBirthPicker extends StatefulWidget {
+  const DateOfBirthPicker({
+    super.key,
+    required this.dateOfBirthController,
+    required this.editable,
+  });
+
+  final TextEditingController dateOfBirthController;
+  final bool editable;
+
+  @override
+  State<DateOfBirthPicker> createState() => _DateOfBirthPickerState();
+}
+
+class _DateOfBirthPickerState extends State<DateOfBirthPicker> {
+  @override
+  void initState() {
+    super.initState();
+
+    dateOfBirth = widget.dateOfBirthController.text.trim();
+  }
+
+  DateTime selectedDate = DateTime.now();
+  String dateOfBirth = "";
+
+  Future<void> selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: selectedDate,
+        firstDate: DateTime(1900),
+        lastDate: DateTime.now(),
+        builder: (BuildContext context, child) {
+          var of = Theme.of(context);
+          var primaryColor = of.primaryColor;
+          return Theme(
+            data: ThemeData(
+                colorScheme: ColorScheme.light(
+              primary: primaryColor,
+            )),
+            child: child!,
+          );
+        });
+
+    if (picked != null && picked != selectedDate) {
+      setState(() {
+        selectedDate = picked;
+        dateOfBirth =
+            "${selectedDate.day}/${selectedDate.month}/${selectedDate.year}";
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 40.w,
+      child: InkWell(
+        onTap: () {
+          if (widget.editable) {
+            selectDate(context);
+          }
+        },
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Text(
+              "Date of birth",
+              style: TextStyle(
+                fontSize: 8.sp,
+                color: Colors.black38,
+              ),
+            ),
+            SizedBox(
+              height: 1.h,
+            ),
+            Text(
+              dateOfBirth,
+            ),
+            const Divider(
+              color: Colors.black,
+              thickness: 0.1,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class MaritalStatusWidget extends StatefulWidget {
+  MaritalStatusWidget(
+      {super.key, required this.editable, required this.status});
+
+  final bool editable;
+  String status;
+
+  @override
+  State<MaritalStatusWidget> createState() => _MaritalStatusWdigetState();
+}
+
+class _MaritalStatusWdigetState extends State<MaritalStatusWidget> {
+  var maritalStatus = [
+    "Single",
+    "Married",
+    "Divorced",
+    "Widowed",
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 40.w,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Text(
+            "Marital Status",
+            style: TextStyle(
+              fontSize: 8.sp,
+              color: Colors.black38,
+            ),
+          ),
+          DropdownButton(
+            value: widget.status,
+            borderRadius: BorderRadius.circular(30),
+            isExpanded: true,
+            items: maritalStatus
+                .map(
+                  (status) => DropdownMenuItem(
+                    value: status,
+                    enabled: widget.editable,
+                    child: Text(status),
+                  ),
+                )
+                .toList(),
+            onChanged: (value) {
+              setState(() {
+                widget.status = value.toString();
+              });
+            },
+          ),
+        ],
       ),
     );
   }

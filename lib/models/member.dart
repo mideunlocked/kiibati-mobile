@@ -5,7 +5,10 @@ class Member {
   final String lastName;
   final String mobileNumber;
   final String emailAddress;
-  // age, marital status, sex, profession
+  final int age;
+  final String maritalStatus;
+  final String profession;
+  final String dateOfBirth;
 
   const Member({
     required this.id,
@@ -14,5 +17,9 @@ class Member {
     required this.lastName,
     required this.mobileNumber,
     required this.emailAddress,
+    required this.age,
+    required this.maritalStatus,
+    required this.profession,
+    required this.dateOfBirth,
   });
 }

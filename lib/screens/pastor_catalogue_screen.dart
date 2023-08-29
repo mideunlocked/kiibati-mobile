@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:kiibati_mobile/models/pastor.dart';
-import 'package:kiibati_mobile/widgets/general-widgets/custome_back_button.dart';
 import 'package:sizer/sizer.dart';
+
+import '../models/pastor.dart';
+import '../widgets/general-widgets/conatined_back_button.dart';
+import '../widgets/general-widgets/shaded_image.dart';
+import '../widgets/sermon-list-widget/sermon_list_widget.dart';
 
 class PastorCatalogueScreen extends StatelessWidget {
   const PastorCatalogueScreen({super.key, required this.pastor});
@@ -16,47 +19,56 @@ class PastorCatalogueScreen extends StatelessWidget {
     var bodyMedium = textTheme.bodyMedium;
 
     return Scaffold(
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      body: Stack(
         children: [
-          ShaderMask(
-            shaderCallback: (Rect bounds) {
-              return const LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-
-                colors: [
-                  Colors.black,
-                  Colors.transparent,
-                ],
-                stops: [
-                  0.7,
-                  1.0
-                ], // Adjust these stops to control the fading effect
-              ).createShader(bounds);
-            },
-            blendMode: BlendMode.dstIn,
-            child: Image.asset(
-              pastor.imageUrl,
-              height: 50.h,
-              width: 100.w,
-              fit: BoxFit.cover,
+          SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ShadedImage(imageUrl: pastor.imageUrl),
+                SizedBox(
+                  height: 2.h,
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 3.w),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        pastor.fullName,
+                        style: titleLarge,
+                      ),
+                      SizedBox(
+                        height: 0.5.h,
+                      ),
+                      Text(
+                        pastor.position,
+                        style: bodyMedium,
+                      ),
+                      ListView(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        children: [
+                          const SermonListWidget(),
+                          const SermonListWidget(),
+                          const SermonListWidget(),
+                          const SermonListWidget(),
+                          const SermonListWidget(),
+                          const SermonListWidget(),
+                          const SermonListWidget(),
+                          const SermonListWidget(),
+                          SizedBox(
+                            height: 10.h,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ),
-          SizedBox(
-            height: 2.h,
-          ),
-          Text(
-            pastor.fullName,
-            style: titleLarge,
-          ),
-          SizedBox(
-            height: 0.5.h,
-          ),
-          Text(
-            pastor.position,
-            style: bodyMedium,
-          ),
+          const ContainedBackButton(),
         ],
       ),
     );
