@@ -4,7 +4,7 @@ import 'package:sizer/sizer.dart';
 import '../../widgets/general-widgets/custom_button.dart';
 import '../../widgets/more-widgets/custom_profile_appbar.dart';
 import '../../widgets/more-widgets/profile_textfield.dart';
-import '../forgot_password_screen.dart';
+import '../auth-screens/forgot_password_screen.dart';
 
 class ChangePasswordScreen extends StatefulWidget {
   const ChangePasswordScreen({super.key});

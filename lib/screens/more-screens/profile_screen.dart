@@ -5,6 +5,8 @@ import 'package:sizer/sizer.dart';
 
 import '../../widgets/more-widgets/custom_profile_appbar.dart';
 import '../../widgets/more-widgets/profile_textfield.dart';
+import '../../widgets/profile-widgets/date_of_birth_picker.dart';
+import '../../widgets/profile-widgets/martial_status_widget.dart';
 import 'change_password_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -209,156 +211,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
               ),
+              TextButton(
+                style: ButtonStyle(
+                  textStyle: MaterialStatePropertyAll(bodyMedium),
+                ),
+                onPressed: () {},
+                child: Text(
+                  "SIGN OUT",
+                  style: TextStyle(
+                    color: Colors.red,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class DateOfBirthPicker extends StatefulWidget {
-  const DateOfBirthPicker({
-    super.key,
-    required this.dateOfBirthController,
-    required this.editable,
-  });
-
-  final TextEditingController dateOfBirthController;
-  final bool editable;
-
-  @override
-  State<DateOfBirthPicker> createState() => _DateOfBirthPickerState();
-}
-
-class _DateOfBirthPickerState extends State<DateOfBirthPicker> {
-  @override
-  void initState() {
-    super.initState();
-
-    dateOfBirth = widget.dateOfBirthController.text.trim();
-  }
-
-  DateTime selectedDate = DateTime.now();
-  String dateOfBirth = "";
-
-  Future<void> selectDate(BuildContext context) async {
-    final DateTime? picked = await showDatePicker(
-        context: context,
-        initialDate: selectedDate,
-        firstDate: DateTime(1900),
-        lastDate: DateTime.now(),
-        builder: (BuildContext context, child) {
-          var of = Theme.of(context);
-          var primaryColor = of.primaryColor;
-          return Theme(
-            data: ThemeData(
-                colorScheme: ColorScheme.light(
-              primary: primaryColor,
-            )),
-            child: child!,
-          );
-        });
-
-    if (picked != null && picked != selectedDate) {
-      setState(() {
-        selectedDate = picked;
-        dateOfBirth =
-            "${selectedDate.day}/${selectedDate.month}/${selectedDate.year}";
-      });
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: 40.w,
-      child: InkWell(
-        onTap: () {
-          if (widget.editable) {
-            selectDate(context);
-          }
-        },
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Text(
-              "Date of birth",
-              style: TextStyle(
-                fontSize: 8.sp,
-                color: Colors.black38,
-              ),
-            ),
-            SizedBox(
-              height: 1.h,
-            ),
-            Text(
-              dateOfBirth,
-            ),
-            const Divider(
-              color: Colors.black,
-              thickness: 0.1,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class MaritalStatusWidget extends StatefulWidget {
-  MaritalStatusWidget(
-      {super.key, required this.editable, required this.status});
-
-  final bool editable;
-  String status;
-
-  @override
-  State<MaritalStatusWidget> createState() => _MaritalStatusWdigetState();
-}
-
-class _MaritalStatusWdigetState extends State<MaritalStatusWidget> {
-  var maritalStatus = [
-    "Single",
-    "Married",
-    "Divorced",
-    "Widowed",
-  ];
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: 40.w,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Text(
-            "Marital Status",
-            style: TextStyle(
-              fontSize: 8.sp,
-              color: Colors.black38,
-            ),
-          ),
-          DropdownButton(
-            value: widget.status,
-            borderRadius: BorderRadius.circular(30),
-            isExpanded: true,
-            items: maritalStatus
-                .map(
-                  (status) => DropdownMenuItem(
-                    value: status,
-                    enabled: widget.editable,
-                    child: Text(status),
-                  ),
-                )
-                .toList(),
-            onChanged: (value) {
-              setState(() {
-                widget.status = value.toString();
-              });
-            },
-          ),
-        ],
       ),
     );
   }

@@ -22,15 +22,6 @@ class MoreScreenAppBar extends StatelessWidget {
             fontSize: 16.sp,
           ),
         ),
-        TextButton(
-          onPressed: () {},
-          child: Text(
-            "Sign out",
-            style: TextStyle(
-              color: primaryColor,
-            ),
-          ),
-        ),
       ],
     );
   }

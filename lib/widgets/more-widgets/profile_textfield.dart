@@ -43,9 +43,9 @@ class _ProfileTextfieldState extends State<ProfileTextfield> {
 
   @override
   void dispose() {
+    super.dispose();
     focusNode?.removeListener(_onFocusChange);
     focusNode?.dispose();
-    super.dispose();
   }
 
   void _onFocusChange() {
