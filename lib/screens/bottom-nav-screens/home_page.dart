@@ -6,6 +6,7 @@ import '../../widgets/home-page-widgets/church_today_grid_view.dart';
 import '../../widgets/home-page-widgets/exhortation_container.dart';
 import '../../widgets/home-page-widgets/home_page_app_bar.dart';
 import '../../widgets/home-page-widgets/home_page_title_subtitle.dart';
+import '../../widgets/home-page-widgets/upcoming_service_widget.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -33,17 +34,7 @@ class HomePage extends StatelessWidget {
                 "Discover the heart of our next service as we explore an uplifting message together.",
             sizedBox: sizedBox,
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: 4.w,
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: Image.asset(
-                "assets/images/upcoming.jpeg",
-              ),
-            ),
-          ),
+          const UpcomingServiceWidget(),
           sizedBox,
           sizedBox,
           HomePageTitleSubtitle(

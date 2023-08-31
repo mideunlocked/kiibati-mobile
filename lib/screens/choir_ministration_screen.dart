@@ -6,7 +6,12 @@ import 'package:video_player/video_player.dart';
 import '../widgets/sermon-widgets/sermon-video-widgets/video_loading_indicator.dart';
 
 class ChoirMinistrationScreen extends StatefulWidget {
-  const ChoirMinistrationScreen({super.key});
+  const ChoirMinistrationScreen({
+    super.key,
+    required this.videoUrl,
+  });
+
+  final String videoUrl;
 
   @override
   State<ChoirMinistrationScreen> createState() =>
@@ -22,7 +27,7 @@ class _ChoirMinistrationScreenState extends State<ChoirMinistrationScreen> {
 
     videoController = VideoPlayerController.networkUrl(
       Uri.parse(
-        "https://player.vimeo.com/external/537269866.sd.mp4?s=93d4381e3e1222f48868dcad45de5a11b8e83f99&profile_id=164&oauth2_token_id=57447761",
+        widget.videoUrl,
       ),
     )
       ..addListener(() => setState(() {}))

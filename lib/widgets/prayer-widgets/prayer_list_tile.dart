@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../models/prayer.dart';
+
 class PrayerListTile extends StatelessWidget {
   const PrayerListTile({
     super.key,
@@ -9,7 +11,7 @@ class PrayerListTile extends StatelessWidget {
   });
 
   final double textSize;
-  final Map<String, dynamic> prayer;
+  final Prayer prayer;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +41,7 @@ class PrayerListTile extends StatelessWidget {
               SizedBox(
                 width: 85.w,
                 child: Text(
-                  prayer["prayer"] ?? "",
+                  prayer.prayerPoint,
                   softWrap: true,
                   style: TextStyle(
                     fontWeight: FontWeight.w500,
@@ -59,7 +61,7 @@ class PrayerListTile extends StatelessWidget {
               children: [
                 // bible reference
                 Text(
-                  prayer["verse"] ?? "",
+                  prayer.scripturalReference,
                   style: TextStyle(
                     fontStyle: FontStyle.italic,
                     fontWeight: FontWeight.w500,
@@ -70,7 +72,7 @@ class PrayerListTile extends StatelessWidget {
 
                 // prayer point
                 Text(
-                  prayer["content"] ?? "",
+                  prayer.content,
                   style: TextStyle(
                     fontSize: textSize,
                   ),

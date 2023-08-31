@@ -4,7 +4,12 @@ import 'package:sizer/sizer.dart';
 class DayBibleVerseDialog extends StatelessWidget {
   const DayBibleVerseDialog({
     super.key,
+    required this.verse,
+    required this.reference,
   });
+
+  final String verse;
+  final String reference;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +39,7 @@ class DayBibleVerseDialog extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Verse of the day",
+                "Verse of the week",
                 style: of.textTheme.bodySmall?.copyWith(
                   color: Colors.white60,
                 ),
@@ -43,7 +48,7 @@ class DayBibleVerseDialog extends StatelessWidget {
               Expanded(
                 child: SingleChildScrollView(
                   child: Text(
-                    "The Lord is my strength and my shield; my heart trusts in him, and he helps me. My heart leaps for joy, and with my song I praise him.",
+                    verse,
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.w500,
@@ -54,7 +59,7 @@ class DayBibleVerseDialog extends StatelessWidget {
               ),
               sizedBox,
               Text(
-                "- Psalm 28:7 (NIV)",
+                reference,
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 8.sp,

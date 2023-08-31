@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:kiibati_mobile/screens/choir_ministration_screen.dart';
-import 'package:kiibati_mobile/screens/church_highlight_screen.dart';
-import 'package:kiibati_mobile/screens/prayer_screen.dart';
-import 'package:kiibati_mobile/screens/sermon_screen.dart';
 import 'package:sizer/sizer.dart';
+import 'package:provider/provider.dart';
 
+import '../../providers/church_today_provider.dart';
+import '../church_today_widgets/bible_study_widget.dart';
+import '../church_today_widgets/bible_verse_widget.dart';
+import '../church_today_widgets/choir_ministration_widget.dart';
+import '../church_today_widgets/church_highlight_widget.dart';
+import '../church_today_widgets/latest_sermon_widget.dart';
+import '../church_today_widgets/prayer_for_week_widget.dart';
 import 'church_today_container.dart';
-import 'day_bible_verse_dialog.dart';
 
 class ChurchTodayGridView extends StatelessWidget {
   const ChurchTodayGridView({
@@ -17,6 +20,7 @@ class ChurchTodayGridView extends StatelessWidget {
   Widget build(BuildContext context) {
     var of = Theme.of(context);
     var primaryColor = of.primaryColor;
+    var churchTodayProvider = Provider.of<ChurchTodayProvier>(context);
 
     return GridView(
       padding: EdgeInsets.only(
@@ -40,7 +44,7 @@ class ChurchTodayGridView extends StatelessWidget {
           function: () {
             navigateFunction(
               context,
-              const ChurchHighlightScreen(),
+              ChurchHighlightWidget(churchTodayProvider: churchTodayProvider),
             );
           },
         ),
@@ -52,7 +56,7 @@ class ChurchTodayGridView extends StatelessWidget {
           function: () {
             navigateFunction(
               context,
-              const SermonScreen(),
+              LatestSermonWidget(churchTodayProvider: churchTodayProvider),
             );
           },
         ),
@@ -64,8 +68,8 @@ class ChurchTodayGridView extends StatelessWidget {
           function: () {
             navigateFunction(
               context,
-              const PrayerScreen(
-                title: "Prayers for the week",
+              PrayerForWeekWidget(
+                churchTodayProvider: churchTodayProvider,
               ),
             );
           },
@@ -85,7 +89,10 @@ class ChurchTodayGridView extends StatelessWidget {
           imageUrl:
               "https://images.pexels.com/photos/7520744/pexels-photo-7520744.jpeg?auto=compress&cs=tinysrgb&w=600",
           function: () {
-            navigateFunction(context, const ChoirMinistrationScreen());
+            navigateFunction(
+              context,
+              ChoirMinistrationWidget(churchTodayProvider: churchTodayProvider),
+            );
           },
         ),
         ChurchTodayContainer(
@@ -94,7 +101,10 @@ class ChurchTodayGridView extends StatelessWidget {
           imageUrl:
               "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnOmGlmX5cuUMjuKUciEHFzlMstqxcWNvUfA&usqp=CAU",
           function: () {
-            navigateFunction(context, const SermonScreen());
+            navigateFunction(
+              context,
+              BibleStudyWidget(churchTodayProvider: churchTodayProvider),
+            );
           },
         ),
       ],
@@ -111,9 +121,13 @@ class ChurchTodayGridView extends StatelessWidget {
   }
 
   void showBibleVerseDialog(BuildContext context) {
+    var churchTodayProvider =
+        Provider.of<ChurchTodayProvier>(context, listen: false);
+
     showDialog(
       context: context,
-      builder: (ctx) => const DayBibleVerseDialog(),
+      builder: (ctx) =>
+          BibleVerseDialogWidget(churchTodayProvider: churchTodayProvider),
     );
   }
 }

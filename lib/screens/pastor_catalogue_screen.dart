@@ -4,7 +4,7 @@ import 'package:sizer/sizer.dart';
 import '../models/pastor.dart';
 import '../widgets/general-widgets/conatined_back_button.dart';
 import '../widgets/general-widgets/shaded_image.dart';
-import '../widgets/sermon-list-widget/sermon_list_widget.dart';
+// import '../widgets/sermon-list-widget/sermon_list_widget.dart';
 
 class PastorCatalogueScreen extends StatelessWidget {
   const PastorCatalogueScreen({super.key, required this.pastor});
@@ -49,14 +49,14 @@ class PastorCatalogueScreen extends StatelessWidget {
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         children: [
-                          const SermonListWidget(),
-                          const SermonListWidget(),
-                          const SermonListWidget(),
-                          const SermonListWidget(),
-                          const SermonListWidget(),
-                          const SermonListWidget(),
-                          const SermonListWidget(),
-                          const SermonListWidget(),
+                          // const SermonListWidget(),
+                          // const SermonListWidget(),
+                          // const SermonListWidget(),
+                          // const SermonListWidget(),
+                          // const SermonListWidget(),
+                          // const SermonListWidget(),
+                          // const SermonListWidget(),
+                          // const SermonListWidget(),
                           SizedBox(
                             height: 10.h,
                           ),

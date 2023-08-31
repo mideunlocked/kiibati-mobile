@@ -1,15 +1,18 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../helpers/date_time_formatting.dart';
+import '../../models/sermon.dart';
 import '../../screens/sermon_screen.dart';
 import 'sermon_detail_widget.dart';
 
 class SermonListWidget extends StatelessWidget {
   const SermonListWidget({
     super.key,
+    required this.sermon,
   });
+
+  final Sermon sermon;
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +20,7 @@ class SermonListWidget extends StatelessWidget {
     var textTheme = of.textTheme;
     var primaryColor = of.primaryColor;
     var dateTimeFormatting = DateTimeFormatting();
-    var dateTime = dateTimeFormatting.formatTimeDate(Timestamp.now());
+    var dateTime = dateTimeFormatting.formatTimeDate(sermon.timestamp);
     var sizedBox = SizedBox(
       height: 0.5.h,
     );
@@ -26,7 +29,9 @@ class SermonListWidget extends StatelessWidget {
       onTap: () => Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (ctx) => const SermonScreen(),
+          builder: (ctx) => SermonScreen(
+            sermon: sermon,
+          ),
         ),
       ),
       child: Container(
@@ -57,7 +62,7 @@ class SermonListWidget extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
                 child: Image.network(
-                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSsUuhYKdM8YsgR9-0azxRCaId4Bt_R1P6jcA&usqp=CAU",
+                  sermon.imageUrl,
                   height: 12.h,
                   width: 30.w,
                   fit: BoxFit.fill,
@@ -93,7 +98,11 @@ class SermonListWidget extends StatelessWidget {
 
             // sermon detail widget
             SermonDetailWidget(
-                textTheme: textTheme, sizedBox: sizedBox, dateTime: dateTime),
+              textTheme: textTheme,
+              sizedBox: sizedBox,
+              dateTime: dateTime,
+              sermon: sermon,
+            ),
 
             // download icon button
             Padding(

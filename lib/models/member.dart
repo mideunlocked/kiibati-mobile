@@ -9,8 +9,10 @@ class Member {
   final String maritalStatus;
   final String profession;
   final String dateOfBirth;
+  final String password;
 
-  const Member({
+  const Member(
+    this.password, {
     required this.id,
     this.imageUrl = "",
     required this.firstName,

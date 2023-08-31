@@ -4,7 +4,16 @@ import 'package:sizer/sizer.dart';
 class ExhortationDialog extends StatelessWidget {
   const ExhortationDialog({
     super.key,
+    required this.title,
+    required this.verse,
+    required this.body,
+    required this.reference,
   });
+
+  final String title;
+  final String verse;
+  final String body;
+  final String reference;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +43,7 @@ class ExhortationDialog extends StatelessWidget {
               children: [
                 // exhortation title
                 Text(
-                  "Title: Give thanks",
+                  "Title: $title",
                   style: textTheme.titleLarge?.copyWith(
                     color: Colors.white,
                   ),
@@ -45,7 +54,7 @@ class ExhortationDialog extends StatelessWidget {
 
                 // exhortation bible reference
                 Text(
-                  "\"Give thanks to the Lord, for he is good; his love endures forever.\" - Psalm 107:1 (NIV)",
+                  "$verse - $reference",
                   style: TextStyle(
                     color: Colors.white60,
                     fontSize: 10.sp,
@@ -56,9 +65,9 @@ class ExhortationDialog extends StatelessWidget {
                 ),
 
                 // exhortation text
-                const Text(
-                  "Embrace the power of gratitude this week. Take a moment each day to appreciate the blessings around you, both big and small. Cultivating a heart of gratitude brings joy, contentment, and a deeper connection to the goodness of life. Let gratitude be your guiding light, illuminating the path of positivity and abundance.",
-                  style: TextStyle(
+                Text(
+                  body,
+                  style: const TextStyle(
                     color: Colors.white,
                   ),
                 ),

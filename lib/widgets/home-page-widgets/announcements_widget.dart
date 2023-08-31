@@ -1,6 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../providers/home_page_provider.dart';
 import 'announcement_container.dart';
 
 class AnnouncemenstsWidget extends StatelessWidget {
@@ -10,43 +13,52 @@ class AnnouncemenstsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 35.h,
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        physics: const BouncingScrollPhysics(),
-        child: Row(
-          children: [
-            SizedBox(
-              width: 4.w,
-            ),
-            const AnnoucementContainer(
-              title: "Power Service",
-              subtitle:
-                  "Experience the enriching journey of exploring the Scriptures together. Join us for an engaging and enlightening Bible study session where we delve deeper into God's Word, uncovering its timeless wisdom and applying it to our lives.",
-              timeDate: "Sunday, 9:00 am",
-            ),
-            const AnnoucementContainer(
-              title: "Bible study",
-              subtitle:
-                  "Experience the enriching journey of exploring the Scriptures together. Join us for an engaging and enlightening Bible study session where we delve deeper into God's Word.",
-              timeDate: "Monday, 6:30 pm",
-            ),
-            const AnnoucementContainer(
-              title: "My case is urgent service (Tetesetemi)",
-              subtitle:
-                  "Experience the power of prayer and divine intervention at our weekly 'My Case Is Urgent' service. Join us as we come together in fervent supplication, seeking God's immediate guidance, healing, and breakthrough in every urgent situation. Trust in His faithfulness and witness the miraculous unfold as we unite in prayer.",
-              timeDate: "Wednesday, 7:00 am",
-            ),
-            const AnnoucementContainer(
-              title: "Night of God's throne",
-              subtitle:
-                  "Prepare to encounter the majesty and presence of God during our Night Vigil: Night of God's Throne. Join us for a night of worship, prayer, and seeking God's face as we gather in anticipation of divine encounters, spiritual breakthroughs, and transformative experiences in the presence of His glorious throne.",
-              timeDate: "Quartely last friday of the month, 11pm",
-            ),
-          ],
-        ),
-      ),
+    var homePageProvider = Provider.of<HomePageProvider>(context);
+    const annoucementContainer = AnnoucementContainer(
+      title: "xxxxxxxx",
+      subtitle:
+          "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      timeDate: "xxxxxxxx",
     );
+
+    return StreamBuilder<QuerySnapshot>(
+        stream: homePageProvider.getAnnouncement(),
+        builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (snapshot.hasError) {
+            return const Text('Something went wrong');
+          } else if (snapshot.connectionState == ConnectionState.waiting) {
+            return annoucementContainer;
+          } else if (snapshot.hasData == false && snapshot.data == null) {
+            return annoucementContainer;
+          }
+
+          return SizedBox(
+            height: 35.h,
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              physics: const BouncingScrollPhysics(),
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: 4.w,
+                  ),
+                  Row(
+                    children: snapshot.data?.docs
+                            .map(
+                              (DocumentSnapshot announcement) =>
+                                  AnnoucementContainer(
+                                title: announcement["title"] ?? "",
+                                subtitle: announcement["body"] ?? "",
+                                timeDate: announcement["date-time"] ?? "",
+                              ),
+                            )
+                            .toList() ??
+                        [],
+                  ),
+                ],
+              ),
+            ),
+          );
+        });
   }
 }

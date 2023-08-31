@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../models/prayer_category.dart';
 import '../../screens/prayer_screen.dart';
 
 class PrayerGridTile extends StatelessWidget {
   const PrayerGridTile({
     super.key,
-    required this.prayerTitle,
+    required this.prayersCategory,
     required this.index,
   });
 
-  final String prayerTitle;
   final int index;
+  final PrayersCategory prayersCategory;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,8 @@ class PrayerGridTile extends StatelessWidget {
           context,
           MaterialPageRoute(
             builder: (ctx) => PrayerScreen(
-              title: prayerTitle,
+              title: prayersCategory.name,
+              prayers: prayersCategory.prayers,
             ),
           ),
         );
@@ -44,7 +46,7 @@ class PrayerGridTile extends StatelessWidget {
         alignment: Alignment.centerLeft,
         padding: EdgeInsets.only(left: 4.w),
         child: Text(
-          prayerTitle,
+          prayersCategory.name,
           style: const TextStyle(
             color: Colors.white,
           ),

@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
-import '../data.dart';
 import '../widgets/general-widgets/custome_back_button.dart';
 import '../widgets/highlight-widgets/highlight_image.dart';
 import '../widgets/highlight-widgets/highlight_indicator.dart';
 
 class ChurchHighlightScreen extends StatefulWidget {
-  const ChurchHighlightScreen({super.key});
+  const ChurchHighlightScreen({
+    super.key,
+    required this.highlight,
+  });
+
+  final List<dynamic> highlight;
 
   @override
   State<ChurchHighlightScreen> createState() => _ChurchHighlightScreenState();
@@ -46,7 +50,7 @@ class _ChurchHighlightScreenState extends State<ChurchHighlightScreen> {
                   currentIndex = value;
                 });
               },
-              children: images
+              children: widget.highlight
                   .map(
                     (image) => HighlightImage(
                       // highlight image
@@ -61,11 +65,11 @@ class _ChurchHighlightScreenState extends State<ChurchHighlightScreen> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 1.w),
               child: Row(
-                children: images.map((e) {
+                children: widget.highlight.map((e) {
+                  int id = int.parse(e["id"] ?? "");
+
                   return HighlightIndicator(
-                    color: e["index"] <= currentIndex
-                        ? Colors.white
-                        : Colors.white38,
+                    color: id <= currentIndex ? Colors.white : Colors.white38,
                   );
                 }).toList(),
               ),
@@ -73,7 +77,10 @@ class _ChurchHighlightScreenState extends State<ChurchHighlightScreen> {
 
             // custom back button
             Padding(
-              padding: EdgeInsets.only(top: 3.h),
+              padding: EdgeInsets.only(
+                top: 5.h,
+                left: 4.w,
+              ),
               child: Row(
                 children: [
                   const CustomBackButton(

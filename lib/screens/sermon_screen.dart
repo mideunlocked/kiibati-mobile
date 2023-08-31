@@ -1,11 +1,10 @@
 import 'package:audioplayers/audioplayers.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:kiibati_mobile/helpers/date_time_formatting.dart';
 import 'package:sizer/sizer.dart';
 import 'package:video_player/video_player.dart';
 
-import '../data.dart';
+import '../models/sermon.dart';
 import '../widgets/sermon-widgets/sermon-audio-widgets/audio_player_widget.dart';
 import '../widgets/sermon-widgets/sermon_app_bar.dart';
 import '../widgets/sermon-widgets/sermon_by_widget.dart';
@@ -19,7 +18,10 @@ import '../widgets/sermon-widgets/sermon_type_button.dart';
 class SermonScreen extends StatefulWidget {
   const SermonScreen({
     super.key,
+    required this.sermon,
   });
+
+  final Sermon sermon;
 
   @override
   State<SermonScreen> createState() => _HomeScreenState();
@@ -82,7 +84,9 @@ class _HomeScreenState extends State<SermonScreen> {
     var of = Theme.of(context);
     var textTheme = of.textTheme;
     var dateTimeFormatting = DateTimeFormatting();
-    var dateTime = dateTimeFormatting.formatTimeDate(Timestamp.now());
+    var dateTime = dateTimeFormatting.formatTimeDate(widget.sermon.timestamp);
+    var sermon = widget.sermon;
+    const sizedBox = SizedBox();
 
     return Scaffold(
       body: OrientationBuilder(builder: (context, orientation) {
@@ -93,6 +97,7 @@ class _HomeScreenState extends State<SermonScreen> {
         );
 
         var primaryColor = of.primaryColor;
+
         return isLandscape && isVideoAllowed == true
             ? sermonVideoPlayer
             : SafeArea(
@@ -122,13 +127,20 @@ class _HomeScreenState extends State<SermonScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   // sermon title
-                                  SermonTitleWidget(textTheme: textTheme),
+                                  SermonTitleWidget(
+                                    textTheme: textTheme,
+                                    title: sermon.title,
+                                  ),
 
                                   // sermon reference
-                                  const SermonReferenceWidget(),
+                                  SermonReferenceWidget(
+                                    reference: sermon.scripturalReference,
+                                  ),
 
                                   // sermon by
-                                  const SermonByWidget(),
+                                  SermonByWidget(
+                                    by: sermon.by,
+                                  ),
 
                                   // sermon date and time
                                   Text(
@@ -146,30 +158,36 @@ class _HomeScreenState extends State<SermonScreen> {
                                         EdgeInsets.symmetric(vertical: 2.h),
                                     child: Row(
                                       children: [
-                                        SermonTypeButton(
-                                          heroTag: "1",
-                                          icon: isVideoAllowed == true
-                                              ? Icons.tv_off_rounded
-                                              : Icons.tv_rounded,
-                                          label: isVideoAllowed == true
-                                              ? "Close video"
-                                              : "Watch video",
-                                          function: () => videoFunction(),
-                                        ),
+                                        sermon.videoLink == ""
+                                            ? sizedBox
+                                            : SermonTypeButton(
+                                                heroTag: "1",
+                                                icon: isVideoAllowed == true
+                                                    ? Icons.tv_off_rounded
+                                                    : Icons.tv_rounded,
+                                                label: isVideoAllowed == true
+                                                    ? "Close video"
+                                                    : "Watch video",
+                                                function: () => videoFunction(),
+                                              ),
                                         SizedBox(
                                           width: 5.w,
                                         ),
-                                        SermonTypeButton(
-                                          heroTag: "2",
-                                          icon: Icons.multitrack_audio_rounded,
-                                          iconColor: isAudioAllowed == true
-                                              ? Colors.red
-                                              : Colors.white,
-                                          label: isAudioAllowed == true
-                                              ? "Close audio"
-                                              : "Listen to audio",
-                                          function: () => audioFunction(),
-                                        ),
+                                        sermon.audioLink == ""
+                                            ? sizedBox
+                                            : SermonTypeButton(
+                                                heroTag: "2",
+                                                icon: Icons
+                                                    .multitrack_audio_rounded,
+                                                iconColor:
+                                                    isAudioAllowed == true
+                                                        ? Colors.red
+                                                        : Colors.white,
+                                                label: isAudioAllowed == true
+                                                    ? "Close audio"
+                                                    : "Listen to audio",
+                                                function: () => audioFunction(),
+                                              ),
                                       ],
                                     ),
                                   ),
@@ -180,7 +198,7 @@ class _HomeScreenState extends State<SermonScreen> {
                                       vertical: 2.h,
                                     ),
                                     child: Column(
-                                      children: sermonData
+                                      children: sermon.sermonText
                                           .map(
                                             (e) => SermonTextWidget(
                                               textSize: textSize,
@@ -256,8 +274,11 @@ class _HomeScreenState extends State<SermonScreen> {
       setState(() {
         isAudioAllowed = false;
         audioPlayer.stop();
-        videoController = VideoPlayerController.networkUrl(Uri.parse(
-            "https://player.vimeo.com/external/529325915.sd.mp4?s=ec013d6b805bd9468abeec747119d5ab275ca589&profile_id=164&oauth2_token_id=57447761"))
+        videoController = VideoPlayerController.networkUrl(
+          Uri.parse(
+            widget.sermon.videoLink,
+          ),
+        )
           ..addListener(() => setState(() {}))
           ..setLooping(true)
           ..initialize().then((_) => videoController!.play());
@@ -274,7 +295,7 @@ class _HomeScreenState extends State<SermonScreen> {
         isAudioAllowed = false;
       });
     } else {
-      await audioPlayer.play(AssetSource("audio/bishop.mp3"));
+      await audioPlayer.play(UrlSource(widget.sermon.audioLink));
 
       setState(() {
         isVideoAllowed = false;

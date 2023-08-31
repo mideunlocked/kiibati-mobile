@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
-import '../data.dart';
+import '../models/prayer.dart';
 import '../widgets/prayer-widgets/prayer_list_tile.dart';
 import '../widgets/prayer-widgets/prayer_screen_app_bar.dart';
 import '../widgets/sermon-widgets/sermon_screen_floating_button_widget.dart';
 
 class PrayerScreen extends StatefulWidget {
-  const PrayerScreen({super.key, required this.title});
+  const PrayerScreen({
+    super.key,
+    required this.title,
+    required this.prayers,
+  });
 
   final String title;
+  final List<Prayer> prayers;
 
   @override
   State<PrayerScreen> createState() => _PrayerScreenState();
@@ -35,7 +40,7 @@ class _PrayerScreenState extends State<PrayerScreen> {
               // prayer list widget
               Expanded(
                 child: ListView(
-                  children: prayersForMen.map((prayer) {
+                  children: widget.prayers.map((prayer) {
                     // prayer list tile
                     return PrayerListTile(
                       prayer: prayer,
