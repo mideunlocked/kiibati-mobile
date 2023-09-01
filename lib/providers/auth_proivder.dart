@@ -128,4 +128,26 @@ class AuthProvider with ChangeNotifier {
       return e.toString();
     }
   }
+
+  Future<dynamic> updateUserDetails(Member member) async {
+    final uid = authInstance.currentUser?.uid;
+
+    try {
+      await cloudInstance.collection("users").doc(uid).update({
+        "id": uid,
+        "firstName": member.firstName,
+        "lastName": member.lastName,
+        "email": member.emailAddress,
+        "mobileNumber": member.mobileNumber,
+        "profession": member.profession,
+        "dateOfBirth": member.dateOfBirth,
+        "maritalStatus": member.maritalStatus,
+        "imageUrl": member.imageUrl,
+      });
+    } catch (e) {
+      notifyListeners();
+      print("Update user details error: $e");
+      return e.toString();
+    }
+  }
 }

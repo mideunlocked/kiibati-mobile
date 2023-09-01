@@ -16,6 +16,10 @@ class SermonByWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     FirebaseFirestore cloudInstance = FirebaseFirestore.instance;
     CollectionReference collection = cloudInstance.collection("pastors");
+    const textStyle = TextStyle(
+      color: Colors.black38,
+      fontStyle: FontStyle.italic,
+    );
 
     return FutureBuilder<DocumentSnapshot>(
         future: collection.doc(by).get(),
@@ -23,30 +27,21 @@ class SermonByWidget extends StatelessWidget {
           if (snapshot.hasError) {
             return const Text(
               "Something went wrong",
-              style: TextStyle(
-                color: Colors.black38,
-                fontStyle: FontStyle.italic,
-              ),
+              style: textStyle,
             );
           }
 
           if (snapshot.hasData && !snapshot.data!.exists) {
             return const Text(
               "Pastor does not exist",
-              style: TextStyle(
-                color: Colors.black38,
-                fontStyle: FontStyle.italic,
-              ),
+              style: textStyle,
             );
           }
 
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Text(
               "Loading...",
-              style: TextStyle(
-                color: Colors.black38,
-                fontStyle: FontStyle.italic,
-              ),
+              style: textStyle,
             );
           }
 

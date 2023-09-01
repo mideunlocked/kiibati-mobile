@@ -4,12 +4,14 @@ import 'package:sizer/sizer.dart';
 class DateOfBirthPicker extends StatefulWidget {
   const DateOfBirthPicker({
     super.key,
-    required this.dateOfBirthController,
     required this.editable,
+    required this.callback,
+    required this.dateOfBirth,
   });
 
-  final TextEditingController dateOfBirthController;
   final bool editable;
+  final String dateOfBirth;
+  final Function(String) callback;
 
   @override
   State<DateOfBirthPicker> createState() => _DateOfBirthPickerState();
@@ -20,7 +22,7 @@ class _DateOfBirthPickerState extends State<DateOfBirthPicker> {
   void initState() {
     super.initState();
 
-    dateOfBirth = widget.dateOfBirthController.text.trim();
+    dateOfBirth = widget.dateOfBirth;
   }
 
   DateTime selectedDate = DateTime.now();
@@ -49,6 +51,7 @@ class _DateOfBirthPickerState extends State<DateOfBirthPicker> {
         selectedDate = picked;
         dateOfBirth =
             "${selectedDate.day}/${selectedDate.month}/${selectedDate.year}";
+        widget.callback(dateOfBirth);
       });
     }
   }

@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
-// ignore: must_be_immutable
 class MaritalStatusWidget extends StatefulWidget {
-  MaritalStatusWidget(
-      {super.key, required this.editable, required this.status});
+  const MaritalStatusWidget(
+      {super.key,
+      required this.editable,
+      required this.callback,
+      required this.status});
 
+  final Function(String) callback;
   final bool editable;
-  String status;
+  final String status;
 
   @override
   State<MaritalStatusWidget> createState() => _MaritalStatusWdigetState();
@@ -20,6 +23,15 @@ class _MaritalStatusWdigetState extends State<MaritalStatusWidget> {
     "Divorced",
     "Widowed",
   ];
+
+  var status = "Single";
+
+  @override
+  void initState() {
+    super.initState();
+
+    status = widget.status;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +48,7 @@ class _MaritalStatusWdigetState extends State<MaritalStatusWidget> {
             ),
           ),
           DropdownButton(
-            value: widget.status,
+            value: status,
             borderRadius: BorderRadius.circular(30),
             isExpanded: true,
             items: maritalStatus
@@ -50,7 +62,8 @@ class _MaritalStatusWdigetState extends State<MaritalStatusWidget> {
                 .toList(),
             onChanged: (value) {
               setState(() {
-                widget.status = value.toString();
+                status = value.toString();
+                widget.callback(status);
               });
             },
           ),

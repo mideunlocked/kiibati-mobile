@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../providers/memeber_provider.dart';
+import '../../widgets/more-widgets/auth_check_widget.dart';
 import '../../widgets/more-widgets/more_icon.dart';
 import '../../widgets/more-widgets/more_list_tile.dart';
 import '../../widgets/more-widgets/more_screen_app_bar.dart';
-import '../../widgets/more-widgets/name_container.dart';
 import '../more-screens/about_church_screen.dart';
 import '../more-screens/find_church_screen.dart';
 import '../more-screens/pastors_screen.dart';
 import '../more-screens/pay_offering_screen.dart';
-import '../more-screens/profile_screen.dart';
 
 class MoreScreen extends StatelessWidget {
   const MoreScreen({super.key});
@@ -19,7 +20,7 @@ class MoreScreen extends StatelessWidget {
     var sizedBox = SizedBox(
       height: 2.h,
     );
-    var fullName = "Ariyo Osuolale";
+    var memberProvider = Provider.of<MemberProvider>(context, listen: false);
 
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 3.w),
@@ -30,11 +31,10 @@ class MoreScreen extends StatelessWidget {
           Expanded(
             child: Column(
               children: [
-                MoreListTile(
-                  title: fullName,
-                  widget: NameContainer(fullName: fullName),
-                  page: const ProfileScreen(),
+                AuthCheckWidget(
+                  memberProvider: memberProvider,
                 ),
+
                 // const MoreListTile(
                 //   title: "Chat with us",
                 //   widget: MoreIcon(

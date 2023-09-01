@@ -1,8 +1,11 @@
-// ignore_for_file: must_be_immutable
-
 import 'package:flutter/material.dart';
+import 'package:kiibati_mobile/providers/auth_proivder.dart';
+import 'package:kiibati_mobile/widgets/general-widgets/custom_progress_indicator.dart';
+import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../models/member.dart';
+import '../../widgets/auth-widgets/sign_out_dialog.dart';
 import '../../widgets/more-widgets/custom_profile_appbar.dart';
 import '../../widgets/more-widgets/profile_textfield.dart';
 import '../../widgets/profile-widgets/date_of_birth_picker.dart';
@@ -10,7 +13,9 @@ import '../../widgets/profile-widgets/martial_status_widget.dart';
 import 'change_password_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+  const ProfileScreen({super.key, required this.member});
+
+  final Member member;
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
@@ -24,7 +29,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   var numberController = TextEditingController();
   var emailController = TextEditingController();
   var professionController = TextEditingController();
-  var dateOfBirthController = TextEditingController();
 
   final firstNameNode = FocusNode();
   final lastNameNode = FocusNode();
@@ -37,15 +41,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
   void initState() {
     super.initState();
 
-    firstNameController = TextEditingController(text: "Ariyo");
-    lastNameController = TextEditingController(text: "Osuolale");
-    numberController = TextEditingController(text: "07040225758");
-    emailController = TextEditingController(text: "osuolaleariyo@gmail.com");
-    professionController = TextEditingController(text: "Student");
-    dateOfBirthController = TextEditingController(text: "24/10/2004");
+    var user = widget.member;
 
-    status = "Single";
+    firstNameController = TextEditingController(text: user.firstName);
+    lastNameController = TextEditingController(text: user.lastName);
+    numberController = TextEditingController(text: user.mobileNumber);
+    emailController = TextEditingController(text: user.emailAddress);
+    professionController = TextEditingController(text: user.profession);
+    status = user.maritalStatus;
+    dateOfBirth = user.dateOfBirth;
   }
+
+  final _formKey = GlobalKey<FormState>();
+  final GlobalKey<ScaffoldMessengerState> _scaffoldKey =
+      GlobalKey<ScaffoldMessengerState>();
+
+  bool isLoading = false;
 
   @override
   void dispose() {
@@ -56,10 +67,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
     numberController.dispose();
     emailController.dispose();
     professionController.dispose();
-    dateOfBirthController.dispose();
   }
 
   var status = "Single";
+  var dateOfBirth = "";
+
+  void getDateOfBirth(String str) {
+    setState(() {
+      dateOfBirth = str;
+    });
+  }
+
+  void getStatus(String str) {
+    setState(() {
+      status = str;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,16 +100,28 @@ class _ProfileScreenState extends State<ProfileScreen> {
               textStyle: MaterialStatePropertyAll(bodyMedium),
             ),
             onPressed: () {
-              setState(() {
-                editable = !editable;
-              });
+              if (editable == false) {
+                setState(() {
+                  editable = true;
+                });
+              } else {
+                updateUserDetails();
+                setState(() {
+                  editable = false;
+                });
+              }
             },
-            child: Text(
-              editable ? "SAVE" : "EDIT",
-              style: const TextStyle(
-                color: Colors.black,
-              ),
-            ),
+            child: isLoading == true
+                ? CustomProgressIndicator(
+                    color: primaryColor,
+                    backgroundColor: primaryColor.withOpacity(0.3),
+                  )
+                : Text(
+                    editable == true ? "SAVE" : "EDIT",
+                    style: const TextStyle(
+                      color: Colors.black,
+                    ),
+                  ),
           ),
         ],
       ),
@@ -148,10 +183,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   MaritalStatusWidget(
                     editable: editable,
                     status: status,
+                    callback: getStatus,
                   ),
                   DateOfBirthPicker(
                     editable: editable,
-                    dateOfBirthController: dateOfBirthController,
+                    dateOfBirth: dateOfBirth,
+                    callback: getDateOfBirth,
                   ),
                 ],
               ),
@@ -215,8 +252,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 style: ButtonStyle(
                   textStyle: MaterialStatePropertyAll(bodyMedium),
                 ),
-                onPressed: () {},
-                child: Text(
+                onPressed: () {
+                  showAlertDialog();
+                },
+                child: const Text(
                   "SIGN OUT",
                   style: TextStyle(
                     color: Colors.red,
@@ -229,5 +268,59 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
       ),
     );
+  }
+
+  void showAlertDialog() {
+    showDialog(
+      context: context,
+      builder: (ctx) => const SignOutDialog(),
+    );
+  }
+
+  void updateUserDetails() async {
+    var authProvider = Provider.of<AuthProvider>(context, listen: false);
+
+    final isValid = _formKey.currentState?.validate();
+    if (isValid == false) {
+      return;
+    } else {
+      setState(() {
+        isLoading = true;
+      });
+
+      final response = await authProvider.updateUserDetails(
+        Member(
+          "",
+          id: "",
+          firstName: firstNameController.text.trim(),
+          lastName: lastNameController.text.trim(),
+          mobileNumber: numberController.text.trim(),
+          emailAddress: emailController.text.trim(),
+          age: 0,
+          maritalStatus: status,
+          profession: professionController.text.trim(),
+          dateOfBirth: dateOfBirth,
+        ),
+      );
+      if (response != true) {
+        setState(() {
+          isLoading = false;
+        });
+
+        _scaffoldKey.currentState?.showSnackBar(
+          SnackBar(
+            content: Text(response),
+            backgroundColor: Colors.red,
+          ),
+        );
+        setState(() {
+          isLoading = false;
+        });
+      } else {
+        if (mounted) {
+          Navigator.pop(context);
+        }
+      }
+    }
   }
 }

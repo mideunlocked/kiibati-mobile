@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kiibati_mobile/widgets/general-widgets/custom_progress_indicator.dart';
 import 'package:sizer/sizer.dart';
 
 class CustomButton extends StatelessWidget {
@@ -6,11 +7,13 @@ class CustomButton extends StatelessWidget {
     super.key,
     required this.color,
     required this.label,
+    this.isLoading = false,
     required this.function,
   });
 
   final Color color;
   final String label;
+  final bool isLoading;
   final Function function;
 
   @override
@@ -30,13 +33,17 @@ class CustomButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(50),
         ),
         alignment: Alignment.center,
-        child: Text(
-          label,
-          style: TextStyle(
-            color: isWhite ? null : Colors.white,
-            fontWeight: FontWeight.w700,
-          ),
-        ),
+        child: isLoading == true
+            ? const CustomProgressIndicator(
+                color: Colors.white,
+              )
+            : Text(
+                label,
+                style: TextStyle(
+                  color: isWhite ? null : Colors.white,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
       ),
     );
   }
