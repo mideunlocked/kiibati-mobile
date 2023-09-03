@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
+import '../helpers/encrypt_data.dart';
 import '../models/member.dart';
 
 class AuthProvider with ChangeNotifier {
@@ -12,6 +13,8 @@ class AuthProvider with ChangeNotifier {
     Member member,
   ) async {
     try {
+      await EncryptData.encryptAES(member.password);
+
       await authInstance
           .createUserWithEmailAndPassword(
         email: member.emailAddress,
@@ -28,8 +31,10 @@ class AuthProvider with ChangeNotifier {
           "dateOfBirth": member.dateOfBirth,
           "maritalStatus": member.maritalStatus,
           "imageUrl": member.imageUrl,
+          "password": EncryptData.encrypted?.base64,
         });
-        authInstance.currentUser?.updateDisplayName(
+        var currentUser = authInstance.currentUser;
+        currentUser?.updateDisplayName(
           member.firstName,
         );
       });
@@ -111,15 +116,47 @@ class AuthProvider with ChangeNotifier {
     }
   }
 
-  Future<dynamic> changePassword(String newPassword) async {
+  Future<dynamic> changePassword(
+      String currentPassword, String newPassword) async {
     try {
-      authInstance.currentUser?.updatePassword(newPassword);
+      User? user = FirebaseAuth.instance.currentUser;
+
+      if (user != null) {
+        // Re-authenticate the user with their current password.
+        AuthCredential credential = EmailAuthProvider.credential(
+          email: user.email!,
+          password: currentPassword,
+        );
+
+        await user.reauthenticateWithCredential(credential);
+
+        // If reauthentication is successful, update the password.
+        await user.updatePassword(newPassword).then((value) {
+          EncryptData.encryptAES(newPassword);
+          cloudInstance.collection("users").doc(user.uid).update({
+            "password": EncryptData.encrypted?.base64,
+          });
+        });
+
+        // Password updated successfully.
+        print("Password changed successfully");
+        return true;
+      } else {
+        // User is not signed in.
+        print("User not signed in.");
+        return "User not signed in.";
+      }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');
         return "The password provided is too weak.";
       } else if (e.code == "requires-recent-login") {
-        print("User needs to sign in again before password can be changed.");
+        print(
+            "This operation is sensitive and requires recent authentication. Log in again before retrying this request.");
+        return "This operation is sensitive and requires recent authentication. Log in again before retrying this request.";
+      } else {
+        print(e);
+        return e.message;
       }
     } catch (e) {
       notifyListeners();
@@ -143,6 +180,7 @@ class AuthProvider with ChangeNotifier {
         "dateOfBirth": member.dateOfBirth,
         "maritalStatus": member.maritalStatus,
         "imageUrl": member.imageUrl,
+        "password": member.password,
       });
     } catch (e) {
       notifyListeners();

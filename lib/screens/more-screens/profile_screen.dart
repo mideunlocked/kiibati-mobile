@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:kiibati_mobile/providers/auth_proivder.dart';
-import 'package:kiibati_mobile/widgets/general-widgets/custom_progress_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
+import '../../helpers/encrypt_data.dart';
 import '../../models/member.dart';
+import '../../providers/auth_proivder.dart';
 import '../../widgets/auth-widgets/sign_out_dialog.dart';
+import '../../widgets/general-widgets/custom_progress_indicator.dart';
 import '../../widgets/more-widgets/custom_profile_appbar.dart';
 import '../../widgets/more-widgets/profile_textfield.dart';
 import '../../widgets/profile-widgets/date_of_birth_picker.dart';
 import '../../widgets/profile-widgets/martial_status_widget.dart';
-import 'change_password_screen.dart';
+import '../auth-screens/change_password_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key, required this.member});
@@ -233,10 +234,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   textStyle: MaterialStatePropertyAll(bodyMedium),
                 ),
                 onPressed: () {
+                  EncryptData.decryptAES(widget.member.password);
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (ctx) => const ChangePasswordScreen(),
+                      builder: (ctx) => ChangePasswordScreen(
+                        password: EncryptData.decrypted,
+                      ),
                     ),
                   );
                 },
@@ -290,7 +294,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
       final response = await authProvider.updateUserDetails(
         Member(
-          "",
+          widget.member.password,
           id: "",
           firstName: firstNameController.text.trim(),
           lastName: lastNameController.text.trim(),

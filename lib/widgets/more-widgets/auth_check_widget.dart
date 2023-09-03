@@ -70,7 +70,7 @@ class AuthCheckWidget extends StatelessWidget {
                   widget: NameContainer(fullName: fullName),
                   page: ProfileScreen(
                     member: Member(
-                      "",
+                      data["password"] ?? "",
                       id: data["id"] ?? "",
                       firstName: data["firstName"] ?? "",
                       lastName: data["lastName"] ?? "",
