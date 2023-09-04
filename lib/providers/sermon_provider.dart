@@ -17,4 +17,22 @@ class SermonProvider with ChangeNotifier {
       return const Stream.empty();
     }
   }
+
+  Stream<QuerySnapshot> getPastorSermon(String pastorId) {
+    try {
+      Stream<QuerySnapshot<Map<String, dynamic>>> querySnapshot = cloudInstance
+          .collection("sermons")
+          .orderBy("timestamp", descending: true)
+          .where(
+            "by",
+            isEqualTo: pastorId,
+          )
+          .snapshots();
+
+      return querySnapshot;
+    } catch (e) {
+      print("Get sermons error: $e");
+      return const Stream.empty();
+    }
+  }
 }

@@ -36,11 +36,34 @@ class PastorTile extends StatelessWidget {
         child: Stack(
           alignment: Alignment.bottomLeft,
           children: [
-            Image.asset(
+            Image.network(
               pastor.imageUrl,
               fit: BoxFit.cover,
               height: height,
               width: width,
+              loadingBuilder: (BuildContext context, Widget child,
+                  ImageChunkEvent? loadingProgress) {
+                if (loadingProgress == null) return child;
+                return Center(
+                  child: CircularProgressIndicator(
+                    strokeWidth: 1,
+                    color: Colors.grey,
+                    value: loadingProgress.expectedTotalBytes != null
+                        ? loadingProgress.cumulativeBytesLoaded /
+                            loadingProgress.expectedTotalBytes!
+                        : null,
+                  ),
+                );
+              },
+              errorBuilder:
+                  (BuildContext context, Object error, StackTrace? stackTrace) {
+                return Center(
+                  child: Image.asset(
+                    "assets/images/logo.png",
+                    height: 5.h,
+                  ),
+                );
+              },
             ),
             Container(
               height: height,
@@ -62,7 +85,7 @@ class PastorTile extends StatelessWidget {
                 bottom: 8.h,
               ),
               child: Text(
-                pastor.fullName,
+                "${pastor.title} ${pastor.fullName}",
                 // softWrap: true,
                 // overflow: TextOverflow.ellipsis,
                 // maxLines: 1,

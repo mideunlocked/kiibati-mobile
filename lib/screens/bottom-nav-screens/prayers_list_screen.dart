@@ -23,7 +23,7 @@ class _PrayerListScreenState extends State<PrayerListScreen> {
     var sizedBox = SizedBox(
       height: 2.h,
     );
-    var sermonProvider = Provider.of<PrayerProvider>(context, listen: false);
+    var prayerProvider = Provider.of<PrayerProvider>(context, listen: false);
 
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 3.w),
@@ -43,7 +43,7 @@ class _PrayerListScreenState extends State<PrayerListScreen> {
           // Prayer grid view widget
           Expanded(
             child: StreamBuilder<QuerySnapshot>(
-                stream: sermonProvider.getPrayers(),
+                stream: prayerProvider.getPrayers(),
                 builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
                   if (snapshot.hasError) {
                     return const Text('Something went wrong');
