@@ -10,6 +10,7 @@ import 'providers/church_today_provider.dart';
 import 'providers/home_page_provider.dart';
 import 'providers/memeber_provider.dart';
 import 'providers/pastor_provider.dart';
+import 'providers/payment_provider.dart';
 import 'providers/prayer_provider.dart';
 import 'providers/sermon_provider.dart';
 import 'screens/home_screen.dart';
@@ -54,6 +55,9 @@ class MainApp extends StatelessWidget {
           ),
           ChangeNotifierProvider(
             create: (context) => PastorProvider(),
+          ),
+          ChangeNotifierProvider(
+            create: (context) => PaymentProvider(),
           ),
         ],
         child: MaterialApp(

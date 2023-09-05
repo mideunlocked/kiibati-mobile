@@ -16,13 +16,15 @@ dependencies:
   provider: ^6.0.5
   flutter_native_splash: ^2.3.1
   flutter_launcher_icons: ^0.13.1
-  intl: ^0.18.1
-  timeago: ^3.4.0
+  intl: ^0.17.0
+  timeago: ^3.3.0
   video_player: ^2.7.0
   audioplayers: ^4.0.0
   url_launcher: ^6.1.12
   cached_network_image: ^3.2.3
   encrypt: ^5.0.1
+  uuid: ^3.0.7
+  flutter_paystack: ^1.0.7
 
   # firebase packages
   firebase_core: ^2.13.1
@@ -30,6 +32,7 @@ dependencies:
   firebase_auth: ^4.6.2
   firebase_messaging: ^14.6.3
   firebase_storage: ^11.2.4
+  http: ^0.13.6
 
 dev_dependencies:
   flutter_test:
