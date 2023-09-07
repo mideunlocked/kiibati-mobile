@@ -1,7 +1,7 @@
 name: kiibati_mobile
 description: A new Flutter project.
 publish_to: 'none'
-version: 0.1.0
+version: 1.0.1+1
 
 environment:
   sdk: '>=3.0.3 <4.0.0'
@@ -31,8 +31,6 @@ dependencies:
   cloud_firestore: ^4.8.0
   firebase_auth: ^4.6.2
   firebase_messaging: ^14.6.3
-  firebase_storage: ^11.2.4
-  http: ^0.13.6
 
 dev_dependencies:
   flutter_test:

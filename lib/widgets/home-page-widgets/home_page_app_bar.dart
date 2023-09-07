@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
@@ -11,9 +12,10 @@ class HomePageAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final periodOfDay = DateTimeFormatting().getGreeting();
-
     var of = Theme.of(context);
     var primaryColor = of.primaryColor;
+    final name = FirebaseAuth.instance.currentUser?.displayName ?? "";
+
     return Padding(
       padding: EdgeInsets.only(
         left: 4.w,
@@ -34,7 +36,7 @@ class HomePageAppBar extends StatelessWidget {
 
           // greeting (greet user according to time of the day)
           Text(
-            "Good $periodOfDay Ariyo",
+            "Good $periodOfDay $name",
             style: TextStyle(
               color: primaryColor,
               fontWeight: FontWeight.w500,

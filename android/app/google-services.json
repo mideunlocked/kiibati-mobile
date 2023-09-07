@@ -29,6 +29,13 @@
             {
               "client_id": "388882673516-s7npdrauuvmjb3c7qhinenoo84805g66.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "388882673516-7q8v310fa9gjfv0kvcbqs6j87534rch1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.kiibatiMobile.RunnerTests"
+              }
             }
           ]
         }
