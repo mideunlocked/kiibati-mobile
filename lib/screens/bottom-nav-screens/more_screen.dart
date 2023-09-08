@@ -9,6 +9,7 @@ import '../../widgets/more-widgets/more_list_tile.dart';
 import '../../widgets/more-widgets/more_screen_app_bar.dart';
 import '../more-screens/about_church_screen.dart';
 import '../more-screens/find_church_screen.dart';
+import '../more-screens/help_screen.dart';
 import '../more-screens/pastors_screen.dart';
 import '../more-screens/pay_offering_screen.dart';
 
@@ -79,6 +80,14 @@ class MoreScreen extends StatelessWidget {
                     color: Colors.black,
                   ),
                   page: AboutScreen(),
+                ),
+                const MoreListTile(
+                  title: "Help",
+                  widget: Icon(
+                    Icons.help_outline_rounded,
+                    color: Colors.black,
+                  ),
+                  page: HelpScreen(),
                 ),
                 const Spacer(),
                 Text(

@@ -105,25 +105,6 @@ class _SignInScreenState extends State<SignInScreen> {
                         SizedBox(
                           height: 5.h,
                         ),
-                        Text(
-                          "We Value your Privacy",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.black26,
-                            fontSize: 8.sp,
-                          ),
-                        ),
-                        Text(
-                          "By signing up, you agree to our Terms and Privacy Policy",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.black26,
-                            fontSize: 8.sp,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 4.h,
-                        ),
                       ],
                     ),
                   ),

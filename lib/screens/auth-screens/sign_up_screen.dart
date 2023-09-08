@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:kiibati_mobile/screens/auth-screens/login_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../models/member.dart';
 import '../../providers/auth_proivder.dart';
+import '../../widgets/auth-widgets/by_sign_up_prompt.dart';
 import '../../widgets/auth-widgets/have_account_widget.dart';
 import '../../widgets/general-widgets/cancel_screen.dart';
 import '../../widgets/general-widgets/custom_button.dart';
@@ -189,7 +191,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         const HaveAccountWidget(
                           checkText: "Already have an account",
                           actionText: "Sign in now",
-                          widget: SignUpScreen(),
+                          widget: SignInScreen(),
                         ),
                         SizedBox(
                           height: 5.h,
@@ -202,14 +204,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             fontSize: 8.sp,
                           ),
                         ),
-                        Text(
-                          "By signing up, you agree to our Terms and Privacy Policy",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.black26,
-                            fontSize: 8.sp,
-                          ),
+                        SizedBox(
+                          height: 0.5.h,
                         ),
+                        BySignUpPrompt(primaryColor: primaryColor),
                         SizedBox(
                           height: 4.h,
                         ),

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
@@ -27,7 +28,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   void initState() {
     super.initState();
 
-    emailController = TextEditingController(text: "osuolaleariyo@gmail.com");
+    emailController =
+        TextEditingController(text: FirebaseAuth.instance.currentUser?.email);
 
     emailController.addListener(textListener);
   }

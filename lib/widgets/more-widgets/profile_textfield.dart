@@ -91,6 +91,19 @@ class _ProfileTextfieldState extends State<ProfileTextfield> {
                 ),
               ),
       ),
+      validator: (value) {
+        if (value!.isEmpty) {
+          return "${widget.labelText} is required";
+        }
+        if (widget.labelText == "Whatsapp number" &&
+            !RegExp(r'^[+]?[0-9]{10,13}$').hasMatch(value)) {
+          return 'Please enter a valid mobile number.';
+        }
+        if (widget.labelText == "Email" && value.contains(".com") == false) {
+          return "Invalid email address";
+        }
+        return null;
+      },
       onFieldSubmitted: (_) {
         FocusScope.of(context).requestFocus();
       },

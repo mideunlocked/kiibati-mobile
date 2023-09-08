@@ -30,7 +30,7 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var primaryColor = const Color.fromARGB(255, 46, 0, 102);
+    var primaryColor = const Color(0xFF2E0066);
 
     return Sizer(
       builder: (context, orientation, deviceType) => MultiProvider(
