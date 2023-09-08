@@ -9,7 +9,9 @@ import '../../widgets/home-page-widgets/home_page_title_subtitle.dart';
 import '../../widgets/home-page-widgets/upcoming_service_widget.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  const HomePage({super.key, required this.scrollController});
+
+  final ScrollController scrollController;
 
   @override
   Widget build(BuildContext context) {
@@ -18,6 +20,7 @@ class HomePage extends StatelessWidget {
     );
 
     return SingleChildScrollView(
+      controller: scrollController,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

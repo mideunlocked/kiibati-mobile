@@ -13,7 +13,9 @@ import '../more-screens/pastors_screen.dart';
 import '../more-screens/pay_offering_screen.dart';
 
 class MoreScreen extends StatelessWidget {
-  const MoreScreen({super.key});
+  const MoreScreen({super.key, required this.scrollController});
+
+  final ScrollController scrollController;
 
   @override
   Widget build(BuildContext context) {

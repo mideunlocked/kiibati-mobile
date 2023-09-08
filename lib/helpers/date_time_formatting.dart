@@ -14,20 +14,15 @@ class DateTimeFormatting {
 
   String getGreeting() {
     final currentTime = DateTime.now();
-    final formatter = DateFormat.Hm();
 
-    final morningStartTime = formatter.parse('06:00');
-    final afternoonStartTime = formatter.parse('12:00');
-    final eveningStartTime = formatter.parse('18:00');
-
-    if (currentTime.isAfter(eveningStartTime)) {
-      return 'Evening';
-    } else if (currentTime.isAfter(afternoonStartTime)) {
-      return 'Afternoon';
-    } else if (currentTime.isAfter(morningStartTime)) {
-      return 'Morning';
+    if (currentTime.hour < 12) {
+      return 'morning';
+    } else if (currentTime.hour < 17) {
+      return 'afternoon';
+    } else if (currentTime.hour < 20) {
+      return 'evening';
     } else {
-      return 'Night';
+      return 'night';
     }
   }
 

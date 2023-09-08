@@ -11,7 +11,9 @@ import '../../widgets/prayer_list_widget/prayer_grid_tile.dart';
 import '../../widgets/sermon-list-widget/sermon_list_screen_app_bar.dart';
 
 class PrayerListScreen extends StatefulWidget {
-  const PrayerListScreen({super.key});
+  const PrayerListScreen({super.key, required this.scrollController});
+
+  final ScrollController scrollController;
 
   @override
   State<PrayerListScreen> createState() => _PrayerListScreenState();
@@ -55,6 +57,7 @@ class _PrayerListScreenState extends State<PrayerListScreen> {
                     return const Icon(Icons.error_rounded, color: Colors.white);
                   }
                   return GridView(
+                    controller: widget.scrollController,
                     physics: const BouncingScrollPhysics(),
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,

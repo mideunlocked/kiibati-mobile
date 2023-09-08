@@ -10,7 +10,9 @@ import '../../widgets/sermon-list-widget/sermon_list_screen_app_bar.dart';
 import '../../widgets/sermon-list-widget/sermon_list_widget.dart';
 
 class SermonListScreen extends StatefulWidget {
-  const SermonListScreen({super.key});
+  const SermonListScreen({super.key, required this.scrollController});
+
+  final ScrollController scrollController;
 
   @override
   State<SermonListScreen> createState() => _SermonListScreenState();
@@ -56,6 +58,7 @@ class _SermonListScreenState extends State<SermonListScreen> {
                   }
 
                   return ListView(
+                    controller: widget.scrollController,
                     physics: const BouncingScrollPhysics(),
                     children: snapshot.data?.docs
                             .map(
