@@ -1,9 +1,7 @@
-import 'prayer.dart';
-
 class PrayersCategory {
   final String id;
   final String name;
-  final List<Prayer> prayers;
+  final List<dynamic> prayers;
 
   const PrayersCategory({
     required this.id,

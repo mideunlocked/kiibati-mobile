@@ -28,7 +28,7 @@ class ShadedImage extends StatelessWidget {
       blendMode: BlendMode.dstIn,
       child: Image.network(
         imageUrl,
-        height: 50.h,
+        height: 60.h,
         width: 100.w,
         fit: BoxFit.cover,
         loadingBuilder: (BuildContext context, Widget child,

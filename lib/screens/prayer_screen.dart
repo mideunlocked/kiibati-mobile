@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:kiibati_mobile/models/prayer.dart';
 import 'package:sizer/sizer.dart';
 
+import '../models/prayer.dart';
 import '../widgets/prayer-widgets/prayer_list_tile.dart';
 import '../widgets/prayer-widgets/prayer_screen_app_bar.dart';
 import '../widgets/sermon-widgets/sermon_screen_floating_button_widget.dart';
@@ -23,6 +23,15 @@ class PrayerScreen extends StatefulWidget {
 class _PrayerScreenState extends State<PrayerScreen> {
   double textSize = 12.sp;
 
+  ScrollController scrollController = ScrollController();
+
+  @override
+  void dispose() {
+    super.dispose();
+
+    scrollController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +44,10 @@ class _PrayerScreenState extends State<PrayerScreen> {
           child: Column(
             children: [
               // custom app bar
-              PrayerSreenAppBar(title: widget.title),
+              PrayerSreenAppBar(
+                title: widget.title,
+                scrollController: scrollController,
+              ),
 
               // prayer list widget
               Expanded(
@@ -64,6 +76,7 @@ class _PrayerScreenState extends State<PrayerScreen> {
       floatingActionButton: SermonScreenFloatingActionButtons(
         increaseText: () => increaseText(),
         decreaseText: () => decreaseText(),
+        scrollController: scrollController,
       ),
     );
   }

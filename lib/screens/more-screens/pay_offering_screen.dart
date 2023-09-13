@@ -1,14 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_paystack/flutter_paystack.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../helpers/payment.dart';
 import '../../providers/payment_provider.dart';
-import '../../widgets/general-widgets/custom_button.dart';
 import '../../widgets/more-widgets/custom_profile_appbar.dart';
-import '../../widgets/more-widgets/profile_textfield.dart';
 import '../auth-screens/login_screen.dart';
 
 class PayOfferingScreen extends StatefulWidget {
@@ -19,7 +18,7 @@ class PayOfferingScreen extends StatefulWidget {
 }
 
 class _PayOfferingScreenState extends State<PayOfferingScreen> {
-  final amountController = TextEditingController();
+  TextEditingController amountController = TextEditingController();
 
   final amountNode = FocusNode();
 
@@ -44,12 +43,14 @@ class _PayOfferingScreenState extends State<PayOfferingScreen> {
   final GlobalKey<ScaffoldMessengerState> _scaffoldKey =
       GlobalKey<ScaffoldMessengerState>();
 
+  String bankAccount = "1770897501";
+
   @override
   Widget build(BuildContext context) {
     var of = Theme.of(context);
     var textTheme = of.textTheme;
     var titleLarge = textTheme.titleLarge;
-    var primaryColor = of.primaryColor;
+    // var primaryColor = of.primaryColor;
 
     return ScaffoldMessenger(
       key: _scaffoldKey,
@@ -83,36 +84,51 @@ class _PayOfferingScreenState extends State<PayOfferingScreen> {
                           fontSize: 14.sp,
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 12.w,
-                          vertical: 8.h,
-                        ),
-                        child: ProfileTextfield(
-                          editable: true,
-                          controller: amountController,
-                          node: amountNode,
-                          labelText: "Amount",
-                          hintText: "Enter amount",
-                          textInputAction: TextInputAction.done,
-                          textInputType: TextInputType.number,
+                      // Padding(
+                      //   padding: EdgeInsets.symmetric(
+                      //     horizontal: 12.w,
+                      //     vertical: 8.h,
+                      //   ),
+                      //   child: ProfileTextfield(
+                      //     editable: false,
+                      //     controller: amountController,
+                      //     node: amountNode,
+                      //     labelText: "Church account number",
+                      //     hintText: "Enter amount",
+                      //     textInputAction: TextInputAction.done,
+                      //     textInputType: TextInputType.number,
+                      //   ),
+                      // ),
+                      SizedBox(
+                        height: 15.h,
+                      ),
+                      InkWell(
+                        onTap: () => copyToClipboard(bankAccount),
+                        child: Text(
+                          bankAccount,
+                          style: TextStyle(
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
+                      const Text("Polaris bank"),
+                      const Text("Christ Message Ministry"),
                     ],
                   ),
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 8.w,
-                ),
-                child: CustomButton(
-                  color: primaryColor,
-                  label: "Next",
-                  isLoading: isLoading,
-                  function: () => payOffering(),
-                ),
-              ),
+              // Padding(
+              //   padding: EdgeInsets.symmetric(
+              //     horizontal: 8.w,
+              //   ),
+              //   child: CustomButton(
+              //     color: primaryColor,
+              //     label: "Next",
+              //     isLoading: isLoading,
+              //     function: () => payOffering(),
+              //   ),
+              // ),
               SizedBox(
                 height: 2.h,
               ),
@@ -121,6 +137,11 @@ class _PayOfferingScreenState extends State<PayOfferingScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> copyToClipboard(String textToCopy) async {
+    await Clipboard.setData(ClipboardData(text: textToCopy));
+    defaultScaffoldMessenger(Colors.grey, "Copied to clipboard");
   }
 
   void payOffering() async {

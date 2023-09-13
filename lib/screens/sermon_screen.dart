@@ -38,6 +38,7 @@ class _HomeScreenState extends State<SermonScreen> {
   Duration position = Duration.zero;
 
   VideoPlayerController? videoController;
+  ScrollController scrollController = ScrollController();
 
   @override
   void initState() {
@@ -77,6 +78,7 @@ class _HomeScreenState extends State<SermonScreen> {
 
     audioPlayer.dispose();
     videoController?.dispose();
+    scrollController.dispose();
   }
 
   @override
@@ -113,7 +115,10 @@ class _HomeScreenState extends State<SermonScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           // App bar
-                          SermonAppBar(textTheme: textTheme),
+                          SermonAppBar(
+                            textTheme: textTheme,
+                            scrollController: scrollController,
+                          ),
 
                           // sermon video
                           isVideoAllowed == false
@@ -122,6 +127,7 @@ class _HomeScreenState extends State<SermonScreen> {
 
                           Expanded(
                             child: SingleChildScrollView(
+                              controller: scrollController,
                               physics: const BouncingScrollPhysics(),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -244,6 +250,7 @@ class _HomeScreenState extends State<SermonScreen> {
                 increaseText: () => increaseText(),
                 decreaseText: () => decreaseText(),
                 padding: isAudioAllowed == true ? 8.h : 0,
+                scrollController: scrollController,
               );
       }),
     );

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../models/prayer.dart';
 import '../../models/prayer_category.dart';
 import '../../providers/prayer_provider.dart';
 import '../../widgets/general-widgets/custom_progress_indicator.dart';
@@ -74,18 +73,7 @@ class _PrayerListScreenState extends State<PrayerListScreen> {
                                 prayersCategory: PrayersCategory(
                                   id: prayer["id"] ?? "",
                                   name: prayer["title"] ?? "",
-                                  prayers: prayers
-                                      .map(
-                                        (prayer) => Prayer(
-                                          id: "",
-                                          content: prayer["content"] ?? "",
-                                          categoryId: "",
-                                          prayerPoint: prayer["prayer"] ?? "",
-                                          scripturalReference:
-                                              prayer["verse"] ?? "",
-                                        ),
-                                      )
-                                      .toList(),
+                                  prayers: prayers,
                                 ),
                               );
                             }).toList() ??

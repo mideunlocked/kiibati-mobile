@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:sizer/sizer.dart';
 
 import 'increase_decrease_button.dart';
@@ -9,15 +10,31 @@ class SermonScreenFloatingActionButtons extends StatelessWidget {
     required this.increaseText,
     required this.decreaseText,
     this.padding = 1,
+    required this.scrollController,
   });
 
   final Function increaseText, decreaseText;
   final double padding;
+  final ScrollController scrollController;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(bottom: padding),
+    return AnimatedBuilder(
+      animation: scrollController,
+      builder: (context, child) {
+        return AnimatedPadding(
+          duration: const Duration(seconds: 1),
+          padding: EdgeInsets.only(
+            left: scrollController.hasClients &&
+                    scrollController.position.userScrollDirection ==
+                        ScrollDirection.reverse
+                ? 100.w
+                : 0,
+            bottom: padding,
+          ),
+          child: child,
+        );
+      },
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
