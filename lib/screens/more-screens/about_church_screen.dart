@@ -114,8 +114,8 @@ class AboutScreen extends StatelessWidget {
                   sizedBox1,
                   ClipRRect(
                     borderRadius: BorderRadius.circular(20),
-                    child: Image.asset(
-                      "assets/images/bishop.jpg",
+                    child: Image.network(
+                      "https://firebasestorage.googleapis.com/v0/b/kiibati-3ea86.appspot.com/o/pastors%2Fbishop.jpeg?alt=media&token=5c9d371c-573e-497d-90dd-870824f16ca0",
                       height: 30.h,
                       width: 65.w,
                       fit: BoxFit.cover,

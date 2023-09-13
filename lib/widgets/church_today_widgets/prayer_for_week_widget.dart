@@ -28,10 +28,11 @@ class PrayerForWeekWidget extends StatelessWidget {
 
           Map<String, dynamic> data =
               snapshot.data?.docs.first.data()! as Map<String, dynamic>;
+          List<dynamic> prayers = data["prayers"] ?? [];
 
           return PrayerScreen(
             title: "Prayers for the week",
-            prayers: data["prayers"] ?? [],
+            prayers: prayers,
           );
         });
   }

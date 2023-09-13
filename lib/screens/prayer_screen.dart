@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:kiibati_mobile/models/prayer.dart';
 import 'package:sizer/sizer.dart';
 
-import '../models/prayer.dart';
 import '../widgets/prayer-widgets/prayer_list_tile.dart';
 import '../widgets/prayer-widgets/prayer_screen_app_bar.dart';
 import '../widgets/sermon-widgets/sermon_screen_floating_button_widget.dart';
@@ -14,7 +14,7 @@ class PrayerScreen extends StatefulWidget {
   });
 
   final String title;
-  final List<Prayer> prayers;
+  final List<dynamic> prayers;
 
   @override
   State<PrayerScreen> createState() => _PrayerScreenState();
@@ -43,7 +43,13 @@ class _PrayerScreenState extends State<PrayerScreen> {
                   children: widget.prayers.map((prayer) {
                     // prayer list tile
                     return PrayerListTile(
-                      prayer: prayer,
+                      prayer: Prayer(
+                        id: "",
+                        content: prayer["content"] ?? "",
+                        categoryId: "categoryId",
+                        prayerPoint: prayer["prayer"] ?? "",
+                        scripturalReference: prayer["verse"] ?? "",
+                      ),
                       textSize: textSize,
                     );
                   }).toList(),

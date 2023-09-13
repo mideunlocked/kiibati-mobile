@@ -33,28 +33,38 @@ class _SermonByWidgetState extends State<SermonByWidget> {
       fontSize: 12.sp,
     );
     var by = "By: $fullName";
+    var edgeInsets = EdgeInsets.only(bottom: 1.h);
 
     return FutureBuilder<DocumentSnapshot>(
         future: collection.doc(widget.by).get(),
         builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
           if (snapshot.hasError) {
-            return Text(
-              fullName != "" ? by : "Something went wrong",
-              style: fullName != "" ? textStyle2 : textStyle,
+            return Padding(
+              padding: edgeInsets,
+              child: Text(
+                fullName != "" ? by : "Something went wrong",
+                style: fullName != "" ? textStyle2 : textStyle,
+              ),
             );
           }
 
           if (snapshot.hasData && !snapshot.data!.exists) {
-            return Text(
-              fullName != "" ? by : "Pastor does not exist",
-              style: fullName != "" ? textStyle2 : textStyle,
+            return Padding(
+              padding: edgeInsets,
+              child: Text(
+                fullName != "" ? by : "Pastor does not exist",
+                style: fullName != "" ? textStyle2 : textStyle,
+              ),
             );
           }
 
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Text(
-              fullName != "" ? by : "Loading...",
-              style: fullName != "" ? textStyle2 : textStyle,
+            return Padding(
+              padding: edgeInsets,
+              child: Text(
+                fullName != "" ? by : "Loading...",
+                style: fullName != "" ? textStyle2 : textStyle,
+              ),
             );
           }
 
@@ -65,7 +75,7 @@ class _SermonByWidgetState extends State<SermonByWidget> {
           fullName = "$title $name";
 
           return Padding(
-            padding: EdgeInsets.only(bottom: 1.h),
+            padding: edgeInsets,
             child: Text(
               widget.isList == true ? fullName : "By: $fullName",
               style: widget.isList == true
