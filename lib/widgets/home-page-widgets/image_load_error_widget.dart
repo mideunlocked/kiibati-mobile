@@ -5,20 +5,27 @@ class ImageLoadErrorWidget extends StatelessWidget {
   const ImageLoadErrorWidget({
     super.key,
     required this.widget,
+    this.width = double.infinity,
+    required this.color,
   });
 
   final Widget widget;
+  final double width;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
-    var of = Theme.of(context);
-    var primaryColor = of.primaryColor;
-
     return Container(
-      height: 20.h,
-      width: 100.w,
+      height: 30.h,
+      width: width,
+      margin: EdgeInsets.symmetric(
+        horizontal: 1.w,
+      ),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        color: color,
+      ),
       alignment: Alignment.center,
-      color: primaryColor.withOpacity(0.7),
       child: widget,
     );
   }

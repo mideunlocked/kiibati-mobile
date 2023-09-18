@@ -5,6 +5,7 @@ import 'package:sizer/sizer.dart';
 
 import '../../providers/home_page_provider.dart';
 import 'announcement_container.dart';
+import 'announcement_loader.dart';
 
 class AnnouncemenstsWidget extends StatelessWidget {
   const AnnouncemenstsWidget({
@@ -14,12 +15,6 @@ class AnnouncemenstsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var homePageProvider = Provider.of<HomePageProvider>(context);
-    const annoucementContainer = AnnoucementContainer(
-      title: "xxxxxxxx",
-      subtitle:
-          "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-      timeDate: "xxxxxxxx",
-    );
 
     return StreamBuilder<QuerySnapshot>(
         stream: homePageProvider.getAnnouncement(),
@@ -27,9 +22,9 @@ class AnnouncemenstsWidget extends StatelessWidget {
           if (snapshot.hasError) {
             return const Text('Something went wrong');
           } else if (snapshot.connectionState == ConnectionState.waiting) {
-            return annoucementContainer;
+            return const AnnouncementLoadingWidget();
           } else if (snapshot.hasData == false && snapshot.data == null) {
-            return annoucementContainer;
+            return const AnnouncementLoadingWidget();
           }
 
           return SizedBox(

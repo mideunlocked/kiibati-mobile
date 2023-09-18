@@ -1,9 +1,9 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
-import 'package:kiibati_mobile/helpers/date_time_formatting.dart';
 import 'package:sizer/sizer.dart';
 import 'package:video_player/video_player.dart';
 
+import '../helpers/date_time_formatting.dart';
 import '../models/sermon.dart';
 import '../widgets/sermon-widgets/sermon-audio-widgets/audio_player_widget.dart';
 import '../widgets/sermon-widgets/sermon_app_bar.dart';
@@ -166,19 +166,25 @@ class _HomeScreenState extends State<SermonScreen> {
                                       children: [
                                         sermon.videoLink == ""
                                             ? sizedBox
-                                            : SermonTypeButton(
-                                                heroTag: "1",
-                                                icon: isVideoAllowed == true
-                                                    ? Icons.tv_off_rounded
-                                                    : Icons.tv_rounded,
-                                                label: isVideoAllowed == true
-                                                    ? "Close video"
-                                                    : "Watch video",
-                                                function: () => videoFunction(),
+                                            : Row(
+                                                children: [
+                                                  SermonTypeButton(
+                                                    heroTag: "1",
+                                                    icon: isVideoAllowed == true
+                                                        ? Icons.tv_off_rounded
+                                                        : Icons.tv_rounded,
+                                                    label:
+                                                        isVideoAllowed == true
+                                                            ? "Close video"
+                                                            : "Watch video",
+                                                    function: () =>
+                                                        videoFunction(),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 5.w,
+                                                  ),
+                                                ],
                                               ),
-                                        SizedBox(
-                                          width: 5.w,
-                                        ),
                                         sermon.audioLink == ""
                                             ? sizedBox
                                             : SermonTypeButton(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kiibati_mobile/widgets/home-page-widgets/image_load_error_widget.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../helpers/date_time_formatting.dart';
@@ -69,23 +70,31 @@ class SermonListWidget extends StatelessWidget {
                   loadingBuilder: (BuildContext context, Widget child,
                       ImageChunkEvent? loadingProgress) {
                     if (loadingProgress == null) return child;
-                    return Center(
-                      child: CircularProgressIndicator(
-                        strokeWidth: 1,
-                        color: Colors.grey,
-                        value: loadingProgress.expectedTotalBytes != null
-                            ? loadingProgress.cumulativeBytesLoaded /
-                                loadingProgress.expectedTotalBytes!
-                            : null,
+                    return SizedBox(
+                      height: 12.h,
+                      width: 30.w,
+                      child: Center(
+                        child: CircularProgressIndicator(
+                          strokeWidth: 1,
+                          color: Colors.grey,
+                          value: loadingProgress.expectedTotalBytes != null
+                              ? loadingProgress.cumulativeBytesLoaded /
+                                  loadingProgress.expectedTotalBytes!
+                              : null,
+                        ),
                       ),
                     );
                   },
                   errorBuilder: (BuildContext context, Object error,
                       StackTrace? stackTrace) {
-                    return Center(
-                      child: Image.asset(
-                        "assets/images/logo.png",
-                        height: 5.h,
+                    return ImageLoadErrorWidget(
+                      width: 28.w,
+                      color: Colors.transparent,
+                      widget: Center(
+                        child: Image.asset(
+                          "assets/images/logo.png",
+                          height: 5.h,
+                        ),
                       ),
                     );
                   },

@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -15,6 +14,9 @@ class UpcomingServiceWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var of = Theme.of(context);
+    var primaryColor = of.primaryColor;
+
     var homePageProvider = Provider.of<HomePageProvider>(context);
 
     return StreamBuilder<QuerySnapshot>(
@@ -23,15 +25,20 @@ class UpcomingServiceWidget extends StatelessWidget {
           if (snapshot.hasError) {
             return const Text('Something went wrong');
           } else if (snapshot.connectionState == ConnectionState.waiting) {
-            return const ImageLoadErrorWidget(
-              widget: CustomProgressIndicator(
+            return ImageLoadErrorWidget(
+              color: primaryColor.withOpacity(0.7),
+              widget: const CustomProgressIndicator(
                 backgroundColor: Colors.transparent,
                 color: Colors.white,
               ),
             );
           } else if (snapshot.hasData == false && snapshot.data == null) {
-            return const ImageLoadErrorWidget(
-              widget: Icon(Icons.error),
+            return ImageLoadErrorWidget(
+              color: primaryColor.withOpacity(0.7),
+              widget: const Icon(
+                Icons.error,
+                color: Colors.white,
+              ),
             );
           }
 
@@ -44,19 +51,33 @@ class UpcomingServiceWidget extends StatelessWidget {
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20),
-              child: CachedNetworkImage(
-                imageUrl: data["imageUrl"] ?? "",
-                placeholder: (context, url) => const ImageLoadErrorWidget(
-                  widget: CustomProgressIndicator(
-                    backgroundColor: Colors.transparent,
-                    color: Colors.white,
-                  ),
-                ),
-                errorWidget: (context, url, error) =>
-                    const ImageLoadErrorWidget(
-                  widget: Icon(Icons.error),
-                ),
-                cacheKey: 'upcoming-service',
+              child: Image.network(
+                data["imageUrl"] ?? "",
+                loadingBuilder: (context, child, loadingProgress) {
+                  if (loadingProgress == null) {
+                    // Image is fully loaded
+                    return child;
+                  } else {
+                    // Show a loading indicator while the image is loading
+                    return ImageLoadErrorWidget(
+                      color: primaryColor.withOpacity(0.7),
+                      widget: const CustomProgressIndicator(
+                        backgroundColor: Colors.transparent,
+                        color: Colors.white,
+                      ),
+                    );
+                  }
+                },
+                errorBuilder: (context, error, stackTrace) {
+                  // Show an error widget if the image fails to load
+                  return ImageLoadErrorWidget(
+                    color: primaryColor.withOpacity(0.7),
+                    widget: const Icon(
+                      Icons.error,
+                      color: Colors.white,
+                    ),
+                  );
+                },
               ),
             ),
           );
