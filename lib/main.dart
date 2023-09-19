@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
 import 'firebase_options.dart';
-import 'helpers/firebaseapi.dart';
 import 'providers/auth_proivder.dart';
 import 'providers/church_today_provider.dart';
 import 'providers/home_page_provider.dart';
@@ -20,7 +19,6 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  FirebaseApi().initNotification();
 
   runApp(const MainApp());
 }

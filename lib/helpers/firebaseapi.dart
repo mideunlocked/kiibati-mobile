@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
 class FirebaseApi {
@@ -6,15 +7,24 @@ class FirebaseApi {
 
   // function to intialize notifications
   Future<void> initNotification() async {
-    await _firebaseMessaging.requestPermission();
+    try {
+      await _firebaseMessaging.requestPermission();
 
-    final fcmToken = await _firebaseMessaging.getToken();
-    await _firebaseMessaging.subscribeToTopic("Church");
+      final fcmToken = await _firebaseMessaging.getToken();
+      await _firebaseMessaging.subscribeToTopic("Church");
 
-    print("Token $fcmToken");
+      print(fcmToken);
+
+      FirebaseMessaging.onBackgroundMessage(handleBackgroundMessage);
+    } catch (e) {
+      print("Error initializing notifications: $e");
+    }
   }
 
   // function to handle recieved messages
+  Future<void> handleBackgroundMessage(RemoteMessage message) async {
+    await Firebase.initializeApp();
+  }
 
   // function to initialize foreground and background settings
 }
