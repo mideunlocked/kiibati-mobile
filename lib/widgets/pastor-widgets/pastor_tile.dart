@@ -20,7 +20,6 @@ class PastorTile extends StatelessWidget {
     var of = Theme.of(context);
     var textTheme = of.textTheme;
     var bodyLarge = textTheme.bodyLarge;
-    var bodyMedium = textTheme.bodyMedium;
 
     return InkWell(
       onTap: () => Navigator.push(
@@ -82,30 +81,15 @@ class PastorTile extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(
                 left: 4.w,
-                bottom: 8.h,
-              ),
-              child: Text(
-                "${pastor.title} ${pastor.fullName}",
-                // softWrap: true,
-                // overflow: TextOverflow.ellipsis,
-                // maxLines: 1,
-                style: bodyLarge?.copyWith(
-                  color: Colors.white,
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(
-                left: 4.w,
                 bottom: 2.h,
               ),
               child: Text(
-                pastor.position,
+                "${pastor.title} ${pastor.fullName}",
                 softWrap: true,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 2,
-                style: bodyMedium?.copyWith(
-                  color: Colors.white70,
+                style: bodyLarge?.copyWith(
+                  color: Colors.white,
                 ),
               ),
             ),

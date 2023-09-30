@@ -15,15 +15,11 @@ class SermonTextWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 1.h),
-      child: Column(
-        children: [
-          Text(
-            "      $data",
-            style: TextStyle(
-              fontSize: textSize,
-            ),
-          ),
-        ],
+      child: Text(
+        data,
+        style: TextStyle(
+          fontSize: textSize,
+        ),
       ),
     );
   }

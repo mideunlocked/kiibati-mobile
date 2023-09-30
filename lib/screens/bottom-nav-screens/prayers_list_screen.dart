@@ -37,7 +37,7 @@ class _PrayerListScreenState extends State<PrayerListScreen> {
             title: "Prayers",
             subtitle:
                 "Let prayer be your guide as you navigate life's challenges and embrace the blessings that unfold along your spiritual journey.",
-            function: () {},
+            function: (_) {},
           ),
           sizedBox,
 

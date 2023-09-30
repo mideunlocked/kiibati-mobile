@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:kiibati_mobile/models/pastor.dart';
+import 'package:kiibati_mobile/screens/pastor_catalogue_screen.dart';
 import 'package:sizer/sizer.dart';
 
 class SermonByWidget extends StatefulWidget {
@@ -74,16 +76,39 @@ class _SermonByWidgetState extends State<SermonByWidget> {
           var name = data["fullName"] ?? "";
           fullName = "$title $name";
 
-          return Padding(
-            padding: edgeInsets,
-            child: Text(
-              widget.isList == true ? fullName : "By: $fullName",
-              style: widget.isList == true
-                  ? TextStyle(
-                      color: Colors.white60,
-                      fontSize: 10.sp,
-                    )
-                  : textStyle2,
+          final pastor = Pastor(
+            id: data["id"] ?? "",
+            title: title,
+            position: data["position"] ?? "",
+            fullName: fullName,
+            imageUrl: data["imageUrl"] ?? "",
+            sermons: [],
+          );
+
+          return InkWell(
+            onTap: () {
+              widget.isList
+                  ? null
+                  : Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (ctx) => PastorCatalogueScreen(
+                          pastor: pastor,
+                        ),
+                      ),
+                    );
+            },
+            child: Padding(
+              padding: edgeInsets,
+              child: Text(
+                widget.isList == true ? fullName : "By: $fullName",
+                style: widget.isList == true
+                    ? TextStyle(
+                        color: Colors.white60,
+                        fontSize: 10.sp,
+                      )
+                    : textStyle2,
+              ),
             ),
           );
         });

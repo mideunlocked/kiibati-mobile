@@ -29,6 +29,9 @@ class SermonDetailWidget extends StatelessWidget {
           // sermon title
           Text(
             sermon.title,
+            maxLines: 2,
+            softWrap: true,
+            overflow: TextOverflow.ellipsis,
             style: textTheme.bodyMedium?.copyWith(
               fontWeight: FontWeight.w500,
               color: Colors.white,

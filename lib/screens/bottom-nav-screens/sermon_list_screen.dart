@@ -1,11 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:kiibati_mobile/helpers/filter_queries.dart';
 import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../models/sermon.dart';
 import '../../providers/sermon_provider.dart';
 import '../../widgets/general-widgets/custom_progress_indicator.dart';
+import '../../widgets/general-widgets/filter_container.dart';
 import '../../widgets/sermon-list-widget/sermon_list_screen_app_bar.dart';
 import '../../widgets/sermon-list-widget/sermon_list_widget.dart';
 
@@ -19,12 +21,26 @@ class SermonListScreen extends StatefulWidget {
 }
 
 class _SermonListScreenState extends State<SermonListScreen> {
+  // holds the filter id
+  String filterId = "0";
+  // holds search text
+  String searchText = "";
+
+  // gets the search text from the child widget (searmon prayer app bar)
+  void getSearchText(String newSearch) {
+    setState(() {
+      searchText = newSearch;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    // custom height ssizedbox
     var sizedBox = SizedBox(
       height: 2.h,
     );
 
+    // sermon provider
     var sermonProvider = Provider.of<SermonProvider>(context, listen: false);
 
     return Padding(
@@ -38,9 +54,47 @@ class _SermonListScreenState extends State<SermonListScreen> {
             title: "Sermons",
             subtitle:
                 "Deepen your spiritual journey and gain fresh insights into God's Word through our enriching sermons.",
-            function: () {},
+            function: getSearchText,
           ),
+
+          // some space
           sizedBox,
+
+          // filter list view
+          SizedBox(
+            height: 3.h,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              physics: const BouncingScrollPhysics(),
+              children: FilterQueries.sermonFilterQueries
+                  .map(
+                    (e) => InkWell(
+                      onTap: () {
+                        setState(() {
+                          if (filterId != e.id || filterId == "0") {
+                            filterId = e.id;
+                          } else {
+                            filterId = "0";
+                          }
+                        });
+                      },
+
+                      // custom filter container
+                      child: FilterContainer(
+                        title: e.title,
+                        id: e.id,
+                        currentFilter: filterId,
+                      ),
+                    ),
+                  )
+                  .toList(),
+            ),
+          ),
+
+          // some spacing
+          SizedBox(
+            height: 2.h,
+          ),
 
           // sermons list view
           Expanded(
@@ -61,6 +115,21 @@ class _SermonListScreenState extends State<SermonListScreen> {
                     controller: widget.scrollController,
                     physics: const BouncingScrollPhysics(),
                     children: snapshot.data?.docs
+                            // filter queries
+                            .where((e) {
+                              if (filterId != "0") {
+                                return e["serviceType"] == filterId;
+                              }
+                              return true;
+                            })
+
+                            // search queries
+                            .where(
+                              (e) =>
+                                  e["title"].toString().toLowerCase().contains(
+                                        searchText.toLowerCase(),
+                                      ),
+                            )
                             .map(
                               (DocumentSnapshot sermon) => SermonListWidget(
                                 sermon: Sermon(

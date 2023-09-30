@@ -90,7 +90,7 @@ class _ChurchHighlightScreenState extends State<ChurchHighlightScreen> {
                     width: 5.w,
                   ),
                   Text(
-                    "Last Sunday service highlights",
+                    "Last service highlights",
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           color: Colors.white60,
                           fontWeight: FontWeight.w500,
