@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "388882673516",
+    "project_id": "kiibati-3ea86",
+    "storage_bucket": "kiibati-3ea86.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:388882673516:android:e557ffceeb11ddc7a74d49",
+        "android_client_info": {
+          "package_name": "com.example.kiibati_mobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "388882673516-s7npdrauuvmjb3c7qhinenoo84805g66.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVe-9gRTMZKox-ccx-z3oxKWJrXGqEr2g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "388882673516-s7npdrauuvmjb3c7qhinenoo84805g66.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "388882673516-7q8v310fa9gjfv0kvcbqs6j87534rch1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.kiibatiMobile.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:388882673516:android:b2c90080d2e9be6ea74d49",
+        "android_client_info": {
+          "package_name": "com.kiibati.kiibati"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "388882673516-s7npdrauuvmjb3c7qhinenoo84805g66.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVe-9gRTMZKox-ccx-z3oxKWJrXGqEr2g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "388882673516-s7npdrauuvmjb3c7qhinenoo84805g66.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "388882673516-7q8v310fa9gjfv0kvcbqs6j87534rch1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.kiibatiMobile.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -36,7 +36,7 @@ class SermonListWidget extends StatelessWidget {
         ),
       ),
       child: Container(
-        height: 15.h,
+        height: 18.h,
         width: 100.w,
         margin: EdgeInsets.only(
           bottom: 1.h,
@@ -64,14 +64,14 @@ class SermonListWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
                 child: Image.network(
                   sermon.imageUrl,
-                  height: 12.h,
+                  height: 15.h,
                   width: 30.w,
                   fit: BoxFit.fill,
                   loadingBuilder: (BuildContext context, Widget child,
                       ImageChunkEvent? loadingProgress) {
                     if (loadingProgress == null) return child;
                     return SizedBox(
-                      height: 12.h,
+                      height: 15.h,
                       width: 30.w,
                       child: Center(
                         child: CircularProgressIndicator(

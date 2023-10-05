@@ -3,6 +3,10 @@ import 'package:kiibati_mobile/models/filter.dart';
 class FilterQueries {
   static List<AppListFilters> sermonFilterQueries = const [
     AppListFilters(
+      title: "All",
+      id: "0",
+    ),
+    AppListFilters(
       title: "Power Service",
       id: "1",
     ),

@@ -46,6 +46,7 @@ class _SermonListScreenState extends State<SermonListScreen> {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 3.w),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           sizedBox,
 

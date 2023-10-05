@@ -126,8 +126,10 @@ class ExhortationContainer extends StatelessWidget {
   // function to exhortation dialog
   void showExhortationDialog(BuildContext context, String title, String verse,
       String body, String reference) {
-    showDialog(
+    showModalBottomSheet(
       context: context,
+      backgroundColor: Colors.transparent,
+      isScrollControlled: true,
       builder: (ctx) {
         return ExhortationDialog(
           title: title,

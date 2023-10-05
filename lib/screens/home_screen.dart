@@ -9,6 +9,8 @@ import 'bottom-nav-screens/home_page.dart';
 import 'bottom-nav-screens/sermon_list_screen.dart';
 
 class HomeScreen extends StatefulWidget {
+  static const routeName = "/";
+
   const HomeScreen({super.key});
 
   @override

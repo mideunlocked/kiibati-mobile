@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:kiibati_mobile/main.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../helpers/date_time_formatting.dart';
@@ -48,9 +49,14 @@ class HomePageAppBar extends StatelessWidget {
           const Spacer(),
 
           // notification icon
-          Icon(
-            Icons.notifications_rounded,
-            color: primaryColor,
+          IconButton(
+            onPressed: () {
+              navigatorKey.currentState?.pushNamed("/NotificationScreen");
+            },
+            icon: Icon(
+              Icons.notifications_rounded,
+              color: primaryColor,
+            ),
           ),
         ],
       ),

@@ -29,6 +29,7 @@ class _PrayerListScreenState extends State<PrayerListScreen> {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 3.w),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           sizedBox,
 

@@ -20,9 +20,8 @@ class FilterContainer extends StatelessWidget {
     var of = Theme.of(context);
     var primaryColor = of.primaryColor;
     return Container(
-      height: 3.h,
       padding: EdgeInsets.symmetric(
-        horizontal: 2.w,
+        horizontal: 4.w,
       ),
       margin: EdgeInsets.only(right: 2.w),
       alignment: Alignment.centerLeft,
@@ -30,25 +29,12 @@ class FilterContainer extends StatelessWidget {
         color: isActive ? primaryColor.withOpacity(0.7) : Colors.grey[300],
         borderRadius: BorderRadius.circular(20),
       ),
-      child: Row(
-        children: [
-          Text(
-            title,
-            style: TextStyle(
-              color: isActive ? Colors.white70 : Colors.black45,
-              fontWeight: isActive ? FontWeight.bold : null,
-            ),
-          ),
-          SizedBox(
-            width: 1.w,
-          ),
-          isActive
-              ? const Icon(
-                  Icons.remove_rounded,
-                  color: Colors.white,
-                )
-              : const SizedBox(),
-        ],
+      child: Text(
+        title,
+        style: TextStyle(
+          color: isActive ? Colors.white70 : Colors.black45,
+          fontWeight: isActive ? FontWeight.bold : null,
+        ),
       ),
     );
   }

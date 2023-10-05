@@ -4,21 +4,27 @@ import 'package:provider/provider.dart';
 import 'package:sizer/sizer.dart';
 
 import 'firebase_options.dart';
+import 'helpers/firebaseapi.dart';
 import 'providers/auth_proivder.dart';
 import 'providers/church_today_provider.dart';
 import 'providers/home_page_provider.dart';
 import 'providers/memeber_provider.dart';
+import 'providers/notification_provider.dart';
 import 'providers/pastor_provider.dart';
 import 'providers/payment_provider.dart';
 import 'providers/prayer_provider.dart';
 import 'providers/sermon_provider.dart';
 import 'screens/home_screen.dart';
+import 'screens/navigation_screen.dart';
+
+final navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await FirebaseApi().initNotification();
 
   runApp(const MainApp());
 }
@@ -56,6 +62,9 @@ class MainApp extends StatelessWidget {
           ),
           ChangeNotifierProvider(
             create: (context) => PaymentProvider(),
+          ),
+          ChangeNotifierProvider(
+            create: (context) => NotificationProvider(),
           ),
         ],
         child: MaterialApp(
@@ -120,7 +129,12 @@ class MainApp extends StatelessWidget {
               backgroundColor: primaryColor,
             ),
           ),
-          home: const HomeScreen(),
+          navigatorKey: navigatorKey,
+          initialRoute: "/",
+          routes: {
+            HomeScreen.routeName: (ctx) => const HomeScreen(),
+            NotificationScreen.routeName: (ctx) => const NotificationScreen(),
+          },
         ),
       ),
     );
