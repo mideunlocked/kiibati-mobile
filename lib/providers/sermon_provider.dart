@@ -13,7 +13,7 @@ class SermonProvider with ChangeNotifier {
 
       return querySnapshot;
     } catch (e) {
-      print("Get sermons error: $e");
+      // print("Get sermons error: $e");
       return const Stream.empty();
     }
   }
@@ -31,7 +31,7 @@ class SermonProvider with ChangeNotifier {
 
       return querySnapshot;
     } catch (e) {
-      print("Get sermons error: $e");
+      // print("Get sermons error: $e");
       return const Stream.empty();
     }
   }

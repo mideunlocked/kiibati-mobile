@@ -164,7 +164,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         ),
       );
     } else {
-      print(result);
+      // print(result);
       _scaffoldKey.currentState?.showSnackBar(
         SnackBar(
           content: Text(result.toString()),

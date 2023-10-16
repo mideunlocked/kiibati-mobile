@@ -105,7 +105,7 @@ class _BibleStudyAudioWidgetState extends State<BibleStudyAudioWidget> {
               min: 0,
               max: widget.duration.inSeconds.toDouble(),
               thumbColor: primaryColor,
-              activeColor: Colors.white,
+              activeColor: primaryColor,
               inactiveColor: Colors.white30,
               value: widget.position.inSeconds.toDouble(),
               onChanged: (value) async {

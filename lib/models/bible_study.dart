@@ -55,12 +55,12 @@ class BibleStudy {
           );
         }).toList();
       } else {
-        print('Error: ${response.statusCode}');
-        print('Error Message: ${response.body}');
+        // print('Error: ${response.statusCode}');
+        // print('Error Message: ${response.body}');
         return const [Verse(text: "null", number: "0")];
       }
     } catch (e) {
-      print("error getting bible verse from api: $e");
+      // print("error getting bible verse from api: $e");
       return Future.error("Get bible chapter error: $e");
     }
   }

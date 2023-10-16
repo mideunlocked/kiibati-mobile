@@ -29,7 +29,7 @@ class SignOutDialog extends StatelessWidget {
               Navigator.pop(context);
               Navigator.pop(context);
             } catch (e) {
-              print(e);
+              // print(e);
             }
           },
           child: const Text(

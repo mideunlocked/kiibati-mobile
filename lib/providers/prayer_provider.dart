@@ -13,7 +13,7 @@ class PrayerProvider with ChangeNotifier {
 
       return querySnapshot;
     } catch (e) {
-      print("Get prayers error: $e");
+      // print("Get prayers error: $e");
       return const Stream.empty();
     }
   }

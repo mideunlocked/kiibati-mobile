@@ -17,7 +17,7 @@ class MemberProvider with ChangeNotifier {
 
       return querySnapshot;
     } catch (e) {
-      print("Get sermons error: $e");
+      // print("Get sermons error: $e");
       return const Stream.empty();
     }
   }

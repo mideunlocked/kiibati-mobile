@@ -25,7 +25,7 @@ class HomePageProvider with ChangeNotifier {
 
       return querySnapshot;
     } catch (e) {
-      print("Get announcement error: $e");
+      // print("Get announcement error: $e");
       return const Stream.empty();
     }
   }
@@ -39,7 +39,7 @@ class HomePageProvider with ChangeNotifier {
 
       return querySnapshot;
     } catch (e) {
-      print("Get weekly exhortation error: $e");
+      // print("Get weekly exhortation error: $e");
       return const Stream.empty();
     }
   }

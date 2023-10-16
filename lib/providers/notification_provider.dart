@@ -13,7 +13,7 @@ class NotificationProvider with ChangeNotifier {
 
       return querySnapshot;
     } catch (e) {
-      print("Get notification error: $e");
+      // print("Get notification error: $e");
       return const Stream.empty();
     }
   }

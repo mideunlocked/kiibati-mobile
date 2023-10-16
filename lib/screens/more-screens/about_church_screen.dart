@@ -100,7 +100,7 @@ class AboutScreen extends StatelessWidget {
                   ),
                   sizedBox1,
                   const Text(
-                    "The wordings of the Christ Message Ministry Anthem (with significance of joining hands together while singing)are: \“One Body, One Saviour, One Word, Christ the Leader (3x)\”",
+                    "The wordings of the Christ Message Ministry Anthem (with significance of joining hands together while singing)are: “One Body, One Saviour, One Word, Christ the Leader (3x)”",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.white60,

@@ -171,7 +171,7 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
         setState(() {
           isLoading = false;
         });
-        print(response);
+        // print(response);
 
         _scaffoldKey.currentState?.showSnackBar(
           SnackBar(

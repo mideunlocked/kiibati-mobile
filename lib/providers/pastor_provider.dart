@@ -11,7 +11,7 @@ class PastorProvider with ChangeNotifier {
 
       return querySnapshot;
     } catch (e) {
-      print("Get pastors error: $e");
+      // print("Get pastors error: $e");
       return const Stream.empty();
     }
   }
@@ -25,7 +25,7 @@ class PastorProvider with ChangeNotifier {
 
       return querySnapshot;
     } catch (e) {
-      print("Get pastors error: $e");
+      // print("Get pastors error: $e");
       return const Stream.empty();
     }
   }

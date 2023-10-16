@@ -1,5 +1,6 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:kiibati_mobile/widgets/bible_study/bible_study_audio_widget.dart';
 
 import '../../models/bible_study.dart';
 import '../bible_study/bible_study_app_bar.dart';
@@ -91,6 +92,13 @@ class _BibleStudySheetState extends State<BibleStudySheet>
               widget: widget,
             ),
             BibleStudyAppBar(audioPlayer: audioPlayer),
+            BibleStudyAudioWidget(
+              controller: _controller,
+              audioPlayer: audioPlayer,
+              duration: duration,
+              position: position,
+              audioLink: widget.bibleStudy.audioLink,
+            ),
           ],
         ),
       ),

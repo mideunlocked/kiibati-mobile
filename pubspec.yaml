@@ -1,7 +1,7 @@
 name: kiibati_mobile
 description: A new Flutter project.
 publish_to: 'none'
-version: 1.5.1+1
+version: 1.6.1+1
 
 environment:
   sdk: '>=3.0.3 <4.0.0'

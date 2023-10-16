@@ -24,11 +24,11 @@ class PaymentProvider with ChangeNotifier {
         charge: charge,
       );
 
-      print(response);
+      // print(response);
 
       return response;
     } catch (e) {
-      print("Payment offering error: ${e.toString()}");
+      // print("Payment offering error: ${e.toString()}");
       return e.toString();
     }
   }
