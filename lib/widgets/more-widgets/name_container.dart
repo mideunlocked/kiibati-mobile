@@ -10,10 +10,13 @@ class NameContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var of = Theme.of(context);
+    var scaffoldBackgroundColor = of.scaffoldBackgroundColor;
+
     return Container(
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: scaffoldBackgroundColor,
         shape: BoxShape.circle,
         border: Border.all(
           color: Colors.black,

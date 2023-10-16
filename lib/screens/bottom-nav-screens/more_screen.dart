@@ -25,92 +25,102 @@ class MoreScreen extends StatelessWidget {
     );
     var memberProvider = Provider.of<MemberProvider>(context, listen: false);
 
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 3.w),
-      child: Column(
-        children: [
-          sizedBox,
-          const MoreScreenAppBar(),
-          Expanded(
-            child: Column(
-              children: [
-                AuthCheckWidget(
-                  memberProvider: memberProvider,
-                ),
+    return WillPopScope(
+      onWillPop: () async {
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          "/",
+          (route) => false,
+        );
+        throw 0;
+      },
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 3.w),
+        child: Column(
+          children: [
+            sizedBox,
+            const MoreScreenAppBar(),
+            Expanded(
+              child: Column(
+                children: [
+                  AuthCheckWidget(
+                    memberProvider: memberProvider,
+                  ),
 
-                // const MoreListTile(
-                //   title: "Chat with us",
-                //   widget: MoreIcon(
-                //     iconUrl: "bubble-chat",
-                //   ),
-                //   page: ChatWithUsScreen(),
-                // ),
-                // const MoreListTile(
-                //   title: "Bookmarks",
-                //   widget: MoreIcon(
-                //     iconUrl: "bookmark_2",
-                //   ),
-                //   page: BookmarksScreen(),
-                // ),
-                const MoreListTile(
-                  title: "Pastors",
-                  widget: MoreIcon(
-                    iconUrl: "pastor",
+                  // const MoreListTile(
+                  //   title: "Chat with us",
+                  //   widget: MoreIcon(
+                  //     iconUrl: "bubble-chat",
+                  //   ),
+                  //   page: ChatWithUsScreen(),
+                  // ),
+                  // const MoreListTile(
+                  //   title: "Bookmarks",
+                  //   widget: MoreIcon(
+                  //     iconUrl: "bookmark_2",
+                  //   ),
+                  //   page: BookmarksScreen(),
+                  // ),
+                  const MoreListTile(
+                    title: "Pastors",
+                    widget: MoreIcon(
+                      iconUrl: "pastor",
+                    ),
+                    page: PastorsScreen(),
                   ),
-                  page: PastorsScreen(),
-                ),
-                const MoreListTile(
-                  title: "Pay offering",
-                  widget: MoreIcon(
-                    iconUrl: "hand",
+                  const MoreListTile(
+                    title: "Pay offering",
+                    widget: MoreIcon(
+                      iconUrl: "hand",
+                    ),
+                    page: PayOfferingScreen(),
                   ),
-                  page: PayOfferingScreen(),
-                ),
-                const MoreListTile(
-                  title: "Find church",
-                  widget: MoreIcon(
-                    iconUrl: "location",
+                  const MoreListTile(
+                    title: "Find church",
+                    widget: MoreIcon(
+                      iconUrl: "location",
+                    ),
+                    page: FindChurchScreen(),
                   ),
-                  page: FindChurchScreen(),
-                ),
-                const MoreListTile(
-                  title: "About church",
-                  widget: Icon(
-                    Icons.info_outline_rounded,
-                    color: Colors.black,
+                  const MoreListTile(
+                    title: "About church",
+                    widget: Icon(
+                      Icons.info_outline_rounded,
+                      color: Colors.black,
+                    ),
+                    page: AboutScreen(),
                   ),
-                  page: AboutScreen(),
-                ),
-                const MoreListTile(
-                  title: "Help",
-                  widget: Icon(
-                    Icons.help_outline_rounded,
-                    color: Colors.black,
+                  const MoreListTile(
+                    title: "Help",
+                    widget: Icon(
+                      Icons.help_outline_rounded,
+                      color: Colors.black,
+                    ),
+                    page: HelpScreen(),
                   ),
-                  page: HelpScreen(),
-                ),
-                const Spacer(),
-                Text(
-                  "From",
-                  style: TextStyle(
-                    color: Colors.black54,
-                    fontSize: 8.sp,
+                  const Spacer(),
+                  Text(
+                    "From",
+                    style: TextStyle(
+                      color: Colors.black54,
+                      fontSize: 8.sp,
+                    ),
                   ),
-                ),
-                Text(
-                  "© 2023 Stact Platforms Inc.",
-                  style: TextStyle(
-                    color: Colors.amber[900],
-                    fontSize: 10.sp,
+                  Text(
+                    "© 2023 Stact Platforms Inc.",
+                    style: TextStyle(
+                      color: Colors.amber[900],
+                      fontSize: 10.sp,
+                    ),
                   ),
-                ),
-                SizedBox(
-                  height: 10.h,
-                ),
-              ],
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

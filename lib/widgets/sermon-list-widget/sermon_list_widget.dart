@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:kiibati_mobile/widgets/home-page-widgets/image_load_error_widget.dart';
 import 'package:sizer/sizer.dart';
 
 import '../../helpers/date_time_formatting.dart';
 import '../../models/sermon.dart';
 import '../../screens/sermon_screen.dart';
+import '../home-page-widgets/image_load_error_widget.dart';
 import 'sermon_detail_widget.dart';
 
 class SermonListWidget extends StatelessWidget {
@@ -40,6 +40,8 @@ class SermonListWidget extends StatelessWidget {
         width: 100.w,
         margin: EdgeInsets.only(
           bottom: 1.h,
+          left: 3.w,
+          right: 3.w,
         ),
         padding: EdgeInsets.symmetric(
           horizontal: 2.w,

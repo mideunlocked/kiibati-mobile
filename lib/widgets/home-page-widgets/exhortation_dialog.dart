@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
+import '../general-widgets/bottom_sheet_app_bar.dart';
+
 class ExhortationDialog extends StatelessWidget {
   const ExhortationDialog({
     super.key,
@@ -20,6 +22,7 @@ class ExhortationDialog extends StatelessWidget {
     var of = Theme.of(context);
     var textTheme = of.textTheme;
     var primaryColor = of.primaryColor;
+    var titleLarge = textTheme.titleLarge;
     var radius = const Radius.circular(15);
 
     return SafeArea(
@@ -38,9 +41,13 @@ class ExhortationDialog extends StatelessWidget {
         ),
         child: Column(
           children: [
-            const ExhortationAppBar(),
+            const BottomSheetAppBar(
+              title: "Weekly Exhortation",
+              function: null,
+            ),
             Expanded(
               child: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -50,7 +57,7 @@ class ExhortationDialog extends StatelessWidget {
                     // exhortation title
                     Text(
                       "Title: $title",
-                      style: textTheme.titleLarge?.copyWith(
+                      style: titleLarge?.copyWith(
                         color: Colors.white,
                       ),
                     ),
@@ -87,43 +94,6 @@ class ExhortationDialog extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class ExhortationAppBar extends StatelessWidget {
-  const ExhortationAppBar({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.center,
-      children: [
-        Row(
-          children: [
-            IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: Image.asset(
-                "assets/icons/close.png",
-                height: 3.h,
-                width: 3.w,
-                color: Colors.white,
-              ),
-            ),
-          ],
-        ),
-        const Text(
-          "Weekly Exhortation",
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ],
     );
   }
 }

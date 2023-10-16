@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:kiibati_mobile/models/bible_study.dart';
+import 'package:kiibati_mobile/widgets/church_today_widgets/bible_study_widget.dart';
 import 'package:sizer/sizer.dart';
 import 'package:provider/provider.dart';
 
 import '../../providers/church_today_provider.dart';
-import '../church_today_widgets/bible_study_widget.dart';
 import '../church_today_widgets/bible_verse_widget.dart';
 import '../church_today_widgets/choir_ministration_widget.dart';
 import '../church_today_widgets/church_highlight_widget.dart';
@@ -100,10 +101,17 @@ class ChurchTodayGridView extends StatelessWidget {
           title: "Bible study outline",
           imageUrl:
               "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTnOmGlmX5cuUMjuKUciEHFzlMstqxcWNvUfA&usqp=CAU",
-          function: () {
-            navigateFunction(
-              context,
-              BibleStudyWidget(churchTodayProvider: churchTodayProvider),
+          function: () async {
+            BibleStudy bibleStudy = await churchTodayProvider.getBibleStudy();
+
+            // ignore: use_build_context_synchronously
+            showModalBottomSheet(
+              context: context,
+              backgroundColor: Colors.transparent,
+              isScrollControlled: true,
+              builder: (ctx) => BibleStudySheet(
+                bibleStudy: bibleStudy,
+              ),
             );
           },
         ),

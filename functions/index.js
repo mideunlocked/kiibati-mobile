@@ -64,33 +64,33 @@ ${data["body"]}
       });
     });
 
-exports.notifyUsersbibleStudy = functions.firestore
-    .document("/bible-study/{id}")
-    .onCreate((snap, context) => {
-      const data = snap.data();
-      const title = data["title"];
-      const content = `Exciting news! A new bible study, 
-${title} is now available.`;
+// exports.notifyUsersbibleStudy = functions.firestore
+//     .document("/bible-study/{id}")
+//     .onCreate((snap, context) => {
+//       const data = snap.data();
+//       const title = data["title"];
+//       const content = `Exciting news! A new bible study,
+// ${title} is now available.`;
 
-      return admin.messaging().sendToTopic("Church", {
-        notification: {
-          title: "New bible study",
-          body: content,
-          clickAction: "FLUTTER_NOTIFICATION_CLICK",
-        },
-      }).then((value) => {
-        return writeToNotifications({
-          title: "New bible study",
-          body: content,
-          type: 3,
-          linkId: context.resource.name,
-          timestamp: admin.firestore.FieldValue.serverTimestamp(),
-        });
-      }).catch((error) => {
-        console.error("Error sending notification:", error);
-        throw new Error("Error sending notification");
-      });
-    });
+//       return admin.messaging().sendToTopic("Church", {
+//         notification: {
+//           title: "New bible study",
+//           body: content,
+//           clickAction: "FLUTTER_NOTIFICATION_CLICK",
+//         },
+//       }).then((value) => {
+//         return writeToNotifications({
+//           title: "New bible study",
+//           body: content,
+//           type: 3,
+//           linkId: context.resource.name,
+//           timestamp: admin.firestore.FieldValue.serverTimestamp(),
+//         });
+//       }).catch((error) => {
+//         console.error("Error sending notification:", error);
+//         throw new Error("Error sending notification");
+//       });
+//     });
 
 exports.notifyUsersPrayersForWeek = functions.firestore
     .document("/prayers-for-week/{id}")

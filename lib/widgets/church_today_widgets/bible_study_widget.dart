@@ -1,51 +1,99 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 
-import '../../models/sermon.dart';
-import '../../providers/church_today_provider.dart';
-import '../../screens/sermon_screen.dart';
-import '../general-widgets/custom_progress_indicator.dart';
+import '../../models/bible_study.dart';
+import '../bible_study/bible_study_app_bar.dart';
+import '../bible_study/bible_study_body.dart';
 
-class BibleStudyWidget extends StatelessWidget {
-  const BibleStudyWidget({
+class BibleStudySheet extends StatefulWidget {
+  const BibleStudySheet({
     super.key,
-    required this.churchTodayProvider,
+    required this.bibleStudy,
   });
 
-  final ChurchTodayProvier churchTodayProvider;
+  final BibleStudy bibleStudy;
+
+  @override
+  State<BibleStudySheet> createState() => _BibleStudySheetState();
+}
+
+class _BibleStudySheetState extends State<BibleStudySheet>
+    with SingleTickerProviderStateMixin {
+  bool isPlaying = false;
+  final audioPlayer = AudioPlayer();
+  Duration duration = Duration.zero;
+  Duration position = Duration.zero;
+
+  late final AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _controller = AnimationController(
+      duration: const Duration(seconds: 1),
+      vsync: this,
+    );
+
+    // listen to state: playing, paused, stopped
+    audioPlayer.onPlayerStateChanged.listen((event) {
+      if (mounted) {
+        setState(() {
+          isPlaying = event == PlayerState.playing;
+        });
+      }
+    });
+
+    // listen to audio duration
+    audioPlayer.onDurationChanged.listen((newDuration) {
+      if (mounted) {
+        setState(() {
+          duration = newDuration;
+        });
+      }
+    });
+
+    // listen to audio position change
+    audioPlayer.onPositionChanged.listen((newPosition) {
+      if (mounted) {
+        setState(() {
+          position = newPosition;
+        });
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+
+    _controller.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<QuerySnapshot>(
-        stream: churchTodayProvider.getBibleStudy(),
-        builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-          if (snapshot.hasError) {
-            return const Text('Something went wrong');
-          } else if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CustomProgressIndicator());
-          } else if (snapshot.hasData == false && snapshot.data == null) {
-            return const Icon(Icons.error_rounded, color: Colors.white);
-          }
+    var of = Theme.of(context);
+    var primaryColor = of.primaryColor;
 
-          Map<String, dynamic> data =
-              snapshot.data?.docs.first.data()! as Map<String, dynamic>;
-
-          return SermonScreen(
-            sermon: Sermon(
-              id: data["id"] ?? "",
-              by: data["by"] ?? "",
-              title: data["title"] ?? "",
-              imageUrl: data["imageUrl"] ?? "",
-              category: data["category"] ?? "",
-              videoLink: data["videoLink"] ?? "",
-              audioLink: data["audioLink"] ?? "",
-              sermonText: data["sermonText"] ?? [],
-              serviceType: data["sermonType"] ?? "",
-              isDownloaded: data["isDownloaded"] ?? false,
-              scripturalReference: data["reference"] ?? "",
-              timestamp: data["timestamp"] ?? Timestamp.now(),
+    return WillPopScope(
+      onWillPop: () async {
+        audioPlayer.stop();
+        Navigator.pop(context);
+        throw 0;
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          color: primaryColor,
+        ),
+        child: Stack(
+          children: [
+            BibleStudyBody(
+              widget: widget,
             ),
-          );
-        });
+            BibleStudyAppBar(audioPlayer: audioPlayer),
+          ],
+        ),
+      ),
+    );
   }
 }

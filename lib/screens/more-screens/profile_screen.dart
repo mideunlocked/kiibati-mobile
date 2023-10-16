@@ -113,10 +113,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               }
             },
             child: isLoading == true
-                ? CustomProgressIndicator(
-                    color: primaryColor,
-                    backgroundColor: primaryColor.withOpacity(0.3),
-                  )
+                ? const CustomProgressIndicator()
                 : Text(
                     editable == true ? "SAVE" : "EDIT",
                     style: const TextStyle(

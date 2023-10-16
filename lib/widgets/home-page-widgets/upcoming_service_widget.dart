@@ -27,10 +27,7 @@ class UpcomingServiceWidget extends StatelessWidget {
           } else if (snapshot.connectionState == ConnectionState.waiting) {
             return ImageLoadErrorWidget(
               color: primaryColor.withOpacity(0.7),
-              widget: const CustomProgressIndicator(
-                backgroundColor: Colors.transparent,
-                color: Colors.white,
-              ),
+              widget: const CustomProgressIndicator(),
             );
           } else if (snapshot.hasData == false && snapshot.data == null) {
             return ImageLoadErrorWidget(
@@ -61,10 +58,7 @@ class UpcomingServiceWidget extends StatelessWidget {
                     // Show a loading indicator while the image is loading
                     return ImageLoadErrorWidget(
                       color: primaryColor.withOpacity(0.7),
-                      widget: const CustomProgressIndicator(
-                        backgroundColor: Colors.transparent,
-                        color: Colors.white,
-                      ),
+                      widget: const CustomProgressIndicator(),
                     );
                   }
                 },

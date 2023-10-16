@@ -16,7 +16,7 @@ class CustomBottomNav extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 6.h,
+      height: 10.h,
       width: 100.w,
       margin: EdgeInsets.symmetric(horizontal: 5.w, vertical: 2.h),
       padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 2.h),
@@ -24,6 +24,14 @@ class CustomBottomNav extends StatelessWidget {
       decoration: BoxDecoration(
         color: Theme.of(context).primaryColor,
         borderRadius: BorderRadius.circular(50),
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.white30,
+            spreadRadius: 3,
+            blurRadius: 10,
+            blurStyle: BlurStyle.outer,
+          ),
+        ],
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -40,16 +48,16 @@ class CustomBottomNav extends StatelessWidget {
             index: 1,
             currentIndex: currentIndex,
           ),
-          BottomNavIcon(
-            iconUrl: "pray",
-            pageController: pageController,
-            index: 2,
-            currentIndex: currentIndex,
-          ),
+          // BottomNavIcon(
+          //   iconUrl: "pray",
+          //   pageController: pageController,
+          //   index: 2,
+          //   currentIndex: currentIndex,
+          // ),
           BottomNavIcon(
             iconUrl: "menu",
             pageController: pageController,
-            index: 3,
+            index: 2,
             currentIndex: currentIndex,
           ),
         ],

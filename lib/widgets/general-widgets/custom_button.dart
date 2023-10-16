@@ -34,9 +34,7 @@ class CustomButton extends StatelessWidget {
         ),
         alignment: Alignment.center,
         child: isLoading == true
-            ? const CustomProgressIndicator(
-                color: Colors.white,
-              )
+            ? const CustomProgressIndicator()
             : Text(
                 label,
                 style: TextStyle(

@@ -16,14 +16,14 @@ class FilterContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool isActive = currentFilter == id;
-
     var of = Theme.of(context);
     var primaryColor = of.primaryColor;
+
     return Container(
       padding: EdgeInsets.symmetric(
         horizontal: 4.w,
       ),
-      margin: EdgeInsets.only(right: 2.w),
+      margin: EdgeInsets.only(right: 3.w, left: id == "0" ? 3.w : 0),
       alignment: Alignment.centerLeft,
       decoration: BoxDecoration(
         color: isActive ? primaryColor.withOpacity(0.7) : Colors.grey[300],

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:kiibati_mobile/models/bible_study.dart';
 
 class ChurchTodayProvier with ChangeNotifier {
   FirebaseFirestore cloudInstance = FirebaseFirestore.instance;
@@ -32,17 +33,29 @@ class ChurchTodayProvier with ChangeNotifier {
     }
   }
 
-  Stream<QuerySnapshot> getBibleStudy() {
+  Future<BibleStudy> getBibleStudy() async {
+    BibleStudy bibleStudy;
+
     try {
-      Stream<QuerySnapshot<Map<String, dynamic>>> querySnapshot = cloudInstance
+      QuerySnapshot<Map<String, dynamic>> querySnapshot = await cloudInstance
           .collection("bible-study")
           .orderBy("timestamp", descending: true)
-          .snapshots();
+          .get();
 
-      return querySnapshot;
+      var data = querySnapshot.docs.first.data();
+
+      bibleStudy = BibleStudy(
+        by: data["by"] ?? "",
+        chapter: data["chapter"] ?? "",
+        version: data["version"] ?? "",
+        bookName: data["bookName"] ?? "",
+        audioLink: data["audioLink"] ?? "",
+      );
+
+      return bibleStudy;
     } catch (e) {
       print("Get bible-study error: $e");
-      return const Stream.empty();
+      return Future.error("Get bible-study error: $e");
     }
   }
 
